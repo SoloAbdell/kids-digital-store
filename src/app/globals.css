@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #FFFDF9;
+  --foreground: #1E293B;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+.watermark-overlay {
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(255, 107, 107, 0.08),
+    rgba(255, 107, 107, 0.08) 35px,
+    transparent 35px,
+    transparent 70px
+  );
+}
