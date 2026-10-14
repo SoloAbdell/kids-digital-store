@@ -3,24 +3,28 @@ import { HelpCircle, ChevronDown } from 'lucide-react';
 export default function FAQ() {
   const faqs = [
     {
-      q: "How do I receive my activity sheets after purchase?",
-      a: "Immediately! Right after completing payment, you'll see a download button on the order confirmation screen. We also automatically send an email with your secure download link so you always have a copy."
+      q: "How do I receive my digital files after purchase?",
+      a: "Immediately! As soon as payment completes, a direct download button appears on your confirmation screen. We also automatically send an email with your permanent secure download link so you always have a copy."
     },
     {
-      q: "Can I print the files multiple times?",
-      a: "Yes, absolutely! You can print each sheet as many times as you like for personal use, siblings, or your own classroom. If your child makes a mistake or wants to color a page again, simply reprint it."
+      q: "What devices can play the Audiobooks (MP3)?",
+      a: "All audio files are delivered as standard high-bitrate DRM-free MP3 tracks. You can play them directly on any smartphone (iPhone, Android), tablet, computer, smart speakers, or transfer them to a kids audio player."
     },
     {
-      q: "What paper size and printer do I need?",
-      a: "All files are formatted in standard high-resolution PDF format, compatible with standard A4 paper (common in Europe/Morocco/International) and US Letter (USA/Canada). Standard home inkjet or laser printers work perfectly."
+      q: "What is the DULO TOONS universe?",
+      a: "DULO TOONS is our exclusive creative franchise starring Dulo the Baby Dragon and his magical forest companions. It includes bedtime audio stories, 3D papercraft gliders, and giant coloring sheets designed to spark creativity and peaceful sleep."
+    },
+    {
+      q: "Can I print the worksheets and planners multiple times?",
+      a: "Yes, 100%! All printable sheets, workbooks, and planners come with an unlimited personal/classroom license. You can print them as often as your children or students want."
+    },
+    {
+      q: "What format are the eBooks and Guides?",
+      a: "Our eBooks come bundled with both reflowable EPUB (compatible with Kindle, Apple Books, and eReaders) and clean high-resolution PDF format for easy reading on tablets and computers."
     },
     {
       q: "What if I lose my download link?",
-      a: "No worries! Your order confirmation email contains your link, and you can always reply to our email with your receipt to receive an instant fresh link."
-    },
-    {
-      q: "Are physical items shipped to my home?",
-      a: "No, these are 100% digital instant downloads. You will not wait days for postal delivery or pay shipping costs. You download, print, and play within 2 minutes."
+      a: "No problem! Your order confirmation email retains your download link. You can also contact support with your purchase email to receive an instant fresh link."
     }
   ];
 
@@ -31,7 +35,7 @@ export default function FAQ() {
           Got Questions?
         </span>
         <h2 className="text-3xl font-black text-slate-900 mt-3">Frequently Asked Questions</h2>
-        <p className="text-xs sm:text-sm text-slate-500 mt-1">Everything you need to know about downloading and printing.</p>
+        <p className="text-xs sm:text-sm text-slate-500 mt-1">Everything you need to know about formats, audio playback, and printing.</p>
       </div>
 
       <div className="space-y-4">

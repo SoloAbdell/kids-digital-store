@@ -1,99 +1,250 @@
 'use client';
 
-import { useState } from 'react';
-import { Product, AgeGroup, Category } from '@/lib/types';
+import { useState, useMemo } from 'react';
+import { Product } from '@/lib/types';
 import ProductCard from './ProductCard';
-import { Sparkles, Layers, SlidersHorizontal } from 'lucide-react';
+import { 
+  Sparkles, 
+  Layers, 
+  Search, 
+  SlidersHorizontal, 
+  Filter, 
+  X, 
+  BookOpen, 
+  Scissors, 
+  Headphones, 
+  GraduationCap, 
+  Calendar, 
+  FileText
+} from 'lucide-react';
+import { CATEGORIES_LIST, FORMATS_LIST } from '@/lib/products';
 
 interface ProductCatalogProps {
   products: Product[];
+  initialCategory?: string;
+  initialDuloFilter?: boolean;
 }
 
-export default function ProductCatalog({ products }: ProductCatalogProps) {
-  const [selectedAge, setSelectedAge] = useState<string>('all');
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+export default function ProductCatalog({ 
+  products, 
+  initialCategory = 'all',
+  initialDuloFilter = false
+}: ProductCatalogProps) {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory);
+  const [selectedFormat, setSelectedFormat] = useState<string>('All Formats');
+  const [onlyDuloToons, setOnlyDuloToons] = useState<boolean>(initialDuloFilter);
+  const [onlyFree, setOnlyFree] = useState<boolean>(false);
+  const [sortBy, setSortBy] = useState<'featured' | 'price-asc' | 'price-desc' | 'rating'>('featured');
 
-  const ageFilters = [
-    { label: '🌟 All Ages', value: 'all' },
-    { label: '🐣 Ages 3–5 (Toddlers & Preschool)', value: '3-5' },
-    { label: '🚀 Ages 6–8 (Kindergarten & Elementary)', value: '6-8' },
-    { label: '🧩 Ages 9+ (Older Kids & STEM)', value: '9+' },
-  ];
+  // Filter and search logic
+  const filteredProducts = useMemo(() => {
+    return products.filter((item) => {
+      // 1. Search Query
+      if (searchQuery.trim()) {
+        const query = searchQuery.toLowerCase().trim();
+        const matchesTitle = item.title.toLowerCase().includes(query);
+        const matchesSubtitle = item.subtitle?.toLowerCase().includes(query) || false;
+        const matchesDesc = item.description.toLowerCase().includes(query);
+        const matchesTags = item.tags?.some((t) => t.toLowerCase().includes(query)) || false;
+        if (!matchesTitle && !matchesSubtitle && !matchesDesc && !matchesTags) {
+          return false;
+        }
+      }
 
-  const categoryFilters = [
-    { label: 'All Activities', value: 'all' },
-    { label: '🎨 Coloring', value: 'coloring' },
-    { label: '✂️ Cut & Paste Crafts', value: 'crafts' },
-    { label: '🔢 Math & Letters', value: 'math-letters' },
-    { label: '🔬 STEM Mazes', value: 'stem' },
-    { label: '🎁 Value Bundles', value: 'bundles' },
-  ];
+      // 2. Category filter
+      if (selectedCategory !== 'all' && item.category !== selectedCategory) {
+        return false;
+      }
 
-  const filteredProducts = products.filter((item) => {
-    const matchesAge = selectedAge === 'all' || item.age_group === selectedAge || item.age_group === 'all';
-    const matchesCategory = selectedCategory === 'all' || item.category === selectedCategory;
-    return matchesAge && matchesCategory;
-  });
+      // 3. Format filter
+      if (selectedFormat !== 'All Formats' && item.format !== selectedFormat) {
+        return false;
+      }
+
+      // 4. DULO TOONS filter
+      if (onlyDuloToons && !item.is_dulo_toons) {
+        return false;
+      }
+
+      // 5. Freebies only
+      if (onlyFree && item.price > 0 && !item.is_freebie) {
+        return false;
+      }
+
+      return true;
+    }).sort((a, b) => {
+      if (sortBy === 'price-asc') return a.price - b.price;
+      if (sortBy === 'price-desc') return b.price - a.price;
+      if (sortBy === 'rating') return (b.rating || 0) - (a.rating || 0);
+      return (b.is_featured ? 1 : 0) - (a.is_featured ? 1 : 0);
+    });
+  }, [products, searchQuery, selectedCategory, selectedFormat, onlyDuloToons, onlyFree, sortBy]);
+
+  const resetAllFilters = () => {
+    setSearchQuery('');
+    setSelectedCategory('all');
+    setSelectedFormat('All Formats');
+    setOnlyDuloToons(false);
+    setOnlyFree(false);
+    setSortBy('featured');
+  };
+
+  const hasActiveFilters = 
+    searchQuery !== '' || 
+    selectedCategory !== 'all' || 
+    selectedFormat !== 'All Formats' || 
+    onlyDuloToons || 
+    onlyFree;
 
   return (
     <section id="catalog" className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="text-center mb-12">
+      {/* Title & Subtitle */}
+      <div className="text-center mb-10">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-pink-100 text-pink-700 font-bold text-xs mb-3">
           <Sparkles className="w-3.5 h-3.5" />
-          <span>Curated Educational Catalog</span>
+          <span>Complete Digital Downloads Store</span>
         </div>
         <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
-          Find The Perfect Activity Sheet
+          Explore All Digital Products & Guides
         </h2>
-        <p className="text-slate-500 max-w-xl mx-auto mt-2 text-sm">
-          Browse by child age or learning topic. Download straight away and print anytime.
+        <p className="text-slate-500 max-w-2xl mx-auto mt-2 text-sm sm:text-base">
+          From bedtime audiobooks and 3D crafts to learning workbooks and planners—instant downloads with lifetime access.
         </p>
       </div>
 
-      {/* Filter Controls */}
-      <div className="bg-slate-50/80 p-6 rounded-3xl border border-slate-200/80 mb-10 space-y-4">
-        {/* Age Groups Tabs */}
-        <div>
-          <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-2 flex items-center gap-1.5">
-            <SlidersHorizontal className="w-3.5 h-3.5" /> Filter By Age Group:
-          </span>
-          <div className="flex flex-wrap gap-2">
-            {ageFilters.map((f) => (
+      {/* Search Bar & Primary Category Nav */}
+      <div className="space-y-6 mb-10">
+        {/* Search Bar */}
+        <div className="relative max-w-2xl mx-auto">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search eBooks, audiobooks, printables, Dulo Toons, STEM puzzles..."
+            className="w-full pl-12 pr-10 py-4 rounded-3xl border border-slate-200 bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm font-medium placeholder:text-slate-400"
+          />
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery('')}
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          )}
+        </div>
+
+        {/* 5 Main Category Navigation Tabs */}
+        <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+          {CATEGORIES_LIST.map((cat) => {
+            const isSelected = selectedCategory === cat.id;
+            return (
               <button
-                key={f.value}
-                onClick={() => setSelectedAge(f.value)}
-                className={`px-4 py-2 rounded-2xl text-xs font-extrabold transition-all ${
-                  selectedAge === f.value
-                    ? 'bg-slate-900 text-white shadow-sm scale-105'
+                key={cat.id}
+                onClick={() => {
+                  setSelectedCategory(cat.id);
+                  if (onlyDuloToons) setOnlyDuloToons(false);
+                }}
+                className={`px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-extrabold transition-all shrink-0 flex items-center gap-2 ${
+                  isSelected
+                    ? 'bg-slate-900 text-white shadow-md scale-105'
                     : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
                 }`}
               >
-                {f.label}
+                <span>{cat.icon}</span>
+                <span>{cat.name}</span>
+                <span className={`text-[11px] px-1.5 py-0.2 rounded-full ${isSelected ? 'bg-slate-700 text-white' : 'bg-slate-100 text-slate-500'}`}>
+                  {cat.id === 'all' ? products.length : products.filter(p => p.category === cat.id).length}
+                </span>
               </button>
-            ))}
+            );
+          })}
+        </div>
+
+        {/* Secondary Filter Controls Bar */}
+        <div className="bg-slate-50 p-4 sm:p-5 rounded-3xl border border-slate-200/80 flex flex-wrap items-center justify-between gap-4">
+          <div className="flex flex-wrap items-center gap-3">
+            {/* Format Filter Dropdown */}
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-bold text-slate-500 flex items-center gap-1">
+                <FileText className="w-3.5 h-3.5" /> Format:
+              </span>
+              <select
+                value={selectedFormat}
+                onChange={(e) => setSelectedFormat(e.target.value)}
+                className="bg-white border border-slate-200 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-pink-500"
+              >
+                {FORMATS_LIST.map((fmt) => (
+                  <option key={fmt} value={fmt}>{fmt}</option>
+                ))}
+              </select>
+            </div>
+
+            {/* DULO TOONS Quick Filter Toggle */}
+            <button
+              onClick={() => setOnlyDuloToons(!onlyDuloToons)}
+              className={`px-3 py-1.5 rounded-xl text-xs font-black transition-all flex items-center gap-1.5 ${
+                onlyDuloToons
+                  ? 'bg-emerald-600 text-white shadow-sm ring-2 ring-emerald-300'
+                  : 'bg-white text-emerald-700 border border-emerald-200 hover:bg-emerald-50'
+              }`}
+            >
+              <span>🐉 DULO TOONS Only</span>
+            </button>
+
+            {/* Freebies Only Toggle */}
+            <button
+              onClick={() => setOnlyFree(!onlyFree)}
+              className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+                onlyFree
+                  ? 'bg-pink-600 text-white shadow-sm'
+                  : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
+              }`}
+            >
+              <span>🎁 Freebies ($0.00)</span>
+            </button>
+          </div>
+
+          {/* Sort By & Clear Filters */}
+          <div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end">
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-bold text-slate-500">Sort:</span>
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value as any)}
+                className="bg-white border border-slate-200 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-pink-500"
+              >
+                <option value="featured">Featured First</option>
+                <option value="rating">Highest Rated</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+              </select>
+            </div>
+
+            {hasActiveFilters && (
+              <button
+                onClick={resetAllFilters}
+                className="text-xs font-bold text-pink-600 hover:text-pink-700 underline flex items-center gap-1"
+              >
+                <X className="w-3.5 h-3.5" /> Clear All
+              </button>
+            )}
           </div>
         </div>
 
-        {/* Category Tabs */}
-        <div>
-          <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-2 flex items-center gap-1.5">
-            <Layers className="w-3.5 h-3.5" /> Filter By Activity Type:
+        {/* Results Counter and Active Badges */}
+        <div className="flex items-center justify-between text-xs text-slate-500 px-2">
+          <span>
+            Showing <strong className="text-slate-900">{filteredProducts.length}</strong> {filteredProducts.length === 1 ? 'product' : 'digital products'}
+            {searchQuery && <span> for "<strong className="text-pink-600">{searchQuery}</strong>"</span>}
           </span>
-          <div className="flex flex-wrap gap-2">
-            {categoryFilters.map((c) => (
-              <button
-                key={c.value}
-                onClick={() => setSelectedCategory(c.value)}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
-                  selectedCategory === c.value
-                    ? 'bg-pink-500 text-white shadow-sm'
-                    : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
-                }`}
-              >
-                {c.label}
-              </button>
-            ))}
-          </div>
+
+          {onlyDuloToons && (
+            <span className="text-emerald-700 font-bold bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+              Showing Dulo Toons Universe Collection
+            </span>
+          )}
         </div>
       </div>
 
@@ -105,13 +256,15 @@ export default function ProductCatalog({ products }: ProductCatalogProps) {
           ))}
         </div>
       ) : (
-        <div className="text-center py-16 bg-white rounded-3xl border border-dashed border-slate-200">
-          <p className="text-4xl mb-3">🔍</p>
-          <h3 className="text-lg font-bold text-slate-800">No activity packs found in this category</h3>
-          <p className="text-xs text-slate-400 mt-1">Try switching to all ages or a different activity type.</p>
+        <div className="text-center py-16 bg-white rounded-3xl border border-dashed border-slate-200 p-8">
+          <p className="text-5xl mb-3">🔍</p>
+          <h3 className="text-lg font-black text-slate-800">No digital products found</h3>
+          <p className="text-xs text-slate-500 max-w-sm mx-auto mt-1">
+            We couldn't find matches with the current search query or filter selection.
+          </p>
           <button
-            onClick={() => { setSelectedAge('all'); setSelectedCategory('all'); }}
-            className="mt-4 px-4 py-2 bg-amber-300 text-slate-800 font-bold text-xs rounded-xl"
+            onClick={resetAllFilters}
+            className="mt-5 px-5 py-2.5 bg-slate-900 text-white font-extrabold text-xs rounded-xl hover:bg-slate-800 transition-all shadow-sm"
           >
             Reset Filters
           </button>

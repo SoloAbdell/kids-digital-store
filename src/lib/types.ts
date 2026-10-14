@@ -1,22 +1,43 @@
-export type AgeGroup = '3-5' | '6-8' | '9+' | 'all';
-export type Category = 'coloring' | 'crafts' | 'math-letters' | 'stem' | 'bundles';
+export type AgeGroup = '3-5' | '6-8' | '9+' | 'all' | 'parents';
+
+export type Category = 
+  | 'ebooks' 
+  | 'printables' 
+  | 'audio' 
+  | 'educational' 
+  | 'planners'
+  | 'bundles';
+
+export type ProductFormat = 
+  | 'Instant PDF' 
+  | 'MP3 Audio' 
+  | 'ZIP Pack' 
+  | 'EPUB / PDF' 
+  | 'Printable Sheet';
 
 export interface Product {
   id: string;
   slug: string;
   title: string;
+  subtitle?: string;
   description: string;
   price: number;
   currency: string;
-  age_group: AgeGroup;
   category: Category;
-  pages_count: number;
-  format: string;
+  format: ProductFormat | string;
+  age_group: AgeGroup;
+  pages_or_duration?: string;
+  pages_count?: number;
   thumbnail_url: string;
   preview_images: string[];
   storage_file_path: string;
   is_featured: boolean;
   is_freebie?: boolean;
+  is_dulo_toons?: boolean;
+  tags?: string[];
+  audio_sample_url?: string;
+  rating?: number;
+  reviews_count?: number;
 }
 
 export interface Order {

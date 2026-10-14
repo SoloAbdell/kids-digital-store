@@ -4,8 +4,8 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'LittleNest Printables | Kids Coloring Books & Activity Sheets',
-  description: 'Download and print fun, educational activity workbooks, coloring pages, and cut-and-paste crafts for kids ages 3-10.',
+  title: 'LittleNest Digital Store | eBooks, Audiobooks, DULO TOONS & Printables',
+  description: 'Downloadable digital goods for curious kids & happy parents: eBooks, bedtime audiobooks, DULO TOONS adventures, educational workbooks, and family planners.',
 };
 
 export default function RootLayout({
