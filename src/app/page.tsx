@@ -23,10 +23,10 @@ export default function HomePage() {
       <ProductCatalog products={SAMPLE_PRODUCTS} />
 
       {/* 5. About Tagline: Cozy Digital Crafts, Stories & Learning */}
-      <section id="why-us" className="py-16 bg-gradient-to-b from-amber-50/50 to-white border-y border-amber-100/60">
+      <section id="why-us" className="py-16 bg-gradient-to-b from-emerald-50/40 via-purple-50/20 to-white border-y border-emerald-100/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-xs font-black uppercase tracking-wider text-amber-800 bg-amber-100 px-3 py-1 rounded-full border border-amber-200">
+            <span className="text-xs font-black uppercase tracking-wider text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-200">
               About Tagline
             </span>
             <h2 className="text-3xl font-black text-slate-900 mt-3">
@@ -38,8 +38,8 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div className="bg-white p-6 rounded-2xl sm:rounded-3xl border border-amber-100 shadow-xs space-y-3">
-              <div className="w-12 h-12 rounded-2xl bg-amber-100 flex items-center justify-center text-2xl">
+            <div className="bg-white p-6 rounded-2xl sm:rounded-3xl border border-emerald-100 shadow-xs space-y-3">
+              <div className="w-12 h-12 rounded-2xl bg-emerald-100 flex items-center justify-center text-2xl">
                 ⚡
               </div>
               <h3 className="font-extrabold text-base text-slate-900">Instant Access</h3>
@@ -48,8 +48,8 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="bg-white p-6 rounded-2xl sm:rounded-3xl border border-rose-100 shadow-xs space-y-3">
-              <div className="w-12 h-12 rounded-2xl bg-rose-100 flex items-center justify-center text-2xl">
+            <div className="bg-white p-6 rounded-2xl sm:rounded-3xl border border-purple-100 shadow-xs space-y-3">
+              <div className="w-12 h-12 rounded-2xl bg-purple-100 flex items-center justify-center text-2xl">
                 🎧
               </div>
               <h3 className="font-extrabold text-base text-slate-900">Bedtime Audio Stories</h3>
@@ -58,8 +58,8 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="bg-white p-6 rounded-2xl sm:rounded-3xl border border-indigo-100 shadow-xs space-y-3">
-              <div className="w-12 h-12 rounded-2xl bg-indigo-100 flex items-center justify-center text-2xl">
+            <div className="bg-white p-6 rounded-2xl sm:rounded-3xl border border-amber-100 shadow-xs space-y-3">
+              <div className="w-12 h-12 rounded-2xl bg-amber-100 flex items-center justify-center text-2xl">
                 ✂️
               </div>
               <h3 className="font-extrabold text-base text-slate-900">Creative Paper Crafts</h3>
@@ -87,7 +87,7 @@ export default function HomePage() {
       {/* 7. Parent & Educator Reviews */}
       <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 font-bold text-xs">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 font-bold text-xs border border-emerald-200">
             <Users className="w-3.5 h-3.5" />
             <span>Community Love</span>
           </div>
@@ -100,7 +100,7 @@ export default function HomePage() {
               "The DULO TOONS bedtime audiobook was magic for my 4-year-old. The sound of rain and gentle music had him asleep in 15 minutes without any tablet tantrum!"
             </p>
             <div className="mt-4 pt-4 border-t border-slate-100 flex items-center gap-3">
-              <div className="w-9 h-9 rounded-full bg-emerald-100 text-emerald-700 font-bold flex items-center justify-center text-xs">
+              <div className="w-9 h-9 rounded-2xl bg-emerald-100 text-emerald-800 font-bold flex items-center justify-center text-xs">
                 AM
               </div>
               <div>
@@ -115,7 +115,7 @@ export default function HomePage() {
               "The 3D Dulo papercraft dragon gliders kept my second-graders captivated on a rainy afternoon. Incredible print resolution and easy-to-follow fold guides."
             </p>
             <div className="mt-4 pt-4 border-t border-slate-100 flex items-center gap-3">
-              <div className="w-9 h-9 rounded-full bg-amber-100 text-amber-800 font-bold flex items-center justify-center text-xs">
+              <div className="w-9 h-9 rounded-2xl bg-purple-100 text-purple-800 font-bold flex items-center justify-center text-xs">
                 MR
               </div>
               <div>
@@ -130,7 +130,7 @@ export default function HomePage() {
               "The family homeschool planner helped me organize our weekly rhythm, meal plans, and kids chores. Being able to re-print clean sheets every Monday is unbeatable."
             </p>
             <div className="mt-4 pt-4 border-t border-slate-100 flex items-center gap-3">
-              <div className="w-9 h-9 rounded-full bg-sky-100 text-sky-700 font-bold flex items-center justify-center text-xs">
+              <div className="w-9 h-9 rounded-2xl bg-amber-100 text-amber-800 font-bold flex items-center justify-center text-xs">
                 SL
               </div>
               <div>

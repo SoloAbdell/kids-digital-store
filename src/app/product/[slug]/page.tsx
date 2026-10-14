@@ -100,7 +100,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
       {/* Back button */}
       <Link
         href="/#catalog"
-        className="inline-flex items-center gap-2 text-xs font-bold text-slate-500 hover:text-slate-900 mb-8 transition-colors"
+        className="inline-flex items-center gap-2 text-xs font-bold text-slate-500 hover:text-emerald-700 mb-8 transition-colors"
       >
         <ArrowLeft className="w-4 h-4" /> Back to Tagline Marketplace
       </Link>
@@ -125,7 +125,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
               </div>
             )}
 
-            {/* Top Badges */}
+            {/* Top Badges: Dragon Green / Purple */}
             <div className="absolute top-4 left-4 flex gap-2">
               {product.is_dulo_toons && (
                 <span className="bg-emerald-950/90 text-emerald-300 text-xs font-black px-3 py-1 rounded-full shadow-md border border-emerald-500/40">
@@ -146,7 +146,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
 
           {/* Interactive Audio Player Preview (If Audio item) */}
           {product.category === 'audio' && (
-            <div className="p-5 rounded-2xl bg-gradient-to-r from-violet-950 to-indigo-950 text-white border border-violet-700/50 flex items-center justify-between gap-4 shadow-lg">
+            <div className="p-5 rounded-2xl bg-gradient-to-r from-purple-950 to-slate-950 text-white border border-purple-700/50 flex items-center justify-between gap-4 shadow-lg">
               <div className="flex items-center gap-3">
                 <button
                   onClick={toggleAudio}
@@ -163,7 +163,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                   </span>
                 </div>
               </div>
-              <span className="text-xs text-violet-300 font-bold bg-violet-900/60 px-3 py-1 rounded-lg">
+              <span className="text-xs text-purple-300 font-bold bg-purple-900/60 px-3 py-1 rounded-lg">
                 320kbps MP3
               </span>
             </div>
@@ -177,7 +177,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                   key={idx}
                   onClick={() => setSelectedPreview(idx)}
                   className={`w-20 h-20 rounded-2xl overflow-hidden border-2 transition-all shrink-0 ${
-                    selectedPreview === idx ? 'border-amber-400 scale-105 shadow-md' : 'border-slate-200 opacity-70'
+                    selectedPreview === idx ? 'border-emerald-600 scale-105 shadow-md' : 'border-slate-200 opacity-70'
                   }`}
                 >
                   <img src={img} alt="Thumbnail preview" className="w-full h-full object-cover" />
@@ -187,7 +187,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
           )}
 
           {/* Digital Delivery & Specifications Box */}
-          <div className="p-6 rounded-3xl bg-slate-50 border border-slate-200/80 space-y-3 text-slate-800 text-xs sm:text-sm">
+          <div className="p-6 rounded-3xl bg-white border border-slate-200/80 shadow-xs space-y-3 text-slate-800 text-xs sm:text-sm">
             <h4 className="font-extrabold text-slate-900 flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-emerald-600" /> Digital Product Specifications:
             </h4>
@@ -204,14 +204,14 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
         <div className="lg:col-span-5 space-y-6">
           <div className="space-y-2">
             <div className="flex items-center gap-2">
-              <span className="text-[11px] font-extrabold uppercase px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700">
+              <span className="text-[11px] font-extrabold uppercase px-2.5 py-0.5 rounded-full bg-purple-50 text-purple-800 border border-purple-200">
                 {product.category}
               </span>
-              <span className="text-[11px] font-extrabold uppercase px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800">
+              <span className="text-[11px] font-extrabold uppercase px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
                 {product.format}
               </span>
               {product.is_dulo_toons && (
-                <span className="text-[11px] font-extrabold uppercase px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800">
+                <span className="text-[11px] font-extrabold uppercase px-2.5 py-0.5 rounded-full bg-emerald-900 text-emerald-300">
                   DULO TOONS
                 </span>
               )}
@@ -254,24 +254,24 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
           {/* Quick Perks list */}
           <div className="space-y-2 py-3 border-y border-slate-100 text-xs text-slate-700">
             <div className="flex items-center gap-2">
-              <Check className="w-4 h-4 text-emerald-500 shrink-0" />
+              <Check className="w-4 h-4 text-emerald-600 shrink-0" />
               <span><strong>{product.pages_or_duration || 'Full Digital Package'}</strong> ready for instant use</span>
             </div>
             <div className="flex items-center gap-2">
-              <Check className="w-4 h-4 text-emerald-500 shrink-0" />
+              <Check className="w-4 h-4 text-emerald-600 shrink-0" />
               <span><strong>Instant Download</strong> on confirmation page + email link</span>
             </div>
             <div className="flex items-center gap-2">
-              <Check className="w-4 h-4 text-emerald-500 shrink-0" />
+              <Check className="w-4 h-4 text-emerald-600 shrink-0" />
               <span><strong>DRM-Free:</strong> Transfer to phone, tablet, computer, or print anytime</span>
             </div>
           </div>
 
-          {/* Cart Action Button */}
+          {/* Cart Action Button: Primary Green */}
           {!isFree && (
             <button
               onClick={() => addToCart(product)}
-              className="w-full py-3.5 px-4 rounded-2xl bg-amber-400 hover:bg-amber-500 text-slate-950 font-black text-sm shadow-playful hover:shadow-playful-hover transition-all flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full py-3.5 px-4 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-black text-sm shadow-playful hover:shadow-playful-hover transition-all flex items-center justify-center gap-2 cursor-pointer"
             >
               <ShoppingBag className="w-4 h-4" />
               <span>Add to Cart (${product.price.toFixed(2)})</span>
@@ -279,13 +279,13 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
           )}
 
           {/* Guest Checkout or Free Download Box */}
-          <div className="bg-slate-50 p-6 rounded-3xl border border-slate-200/90 shadow-sm space-y-4">
+          <div className="bg-white p-6 rounded-3xl border border-slate-200/90 shadow-sm space-y-4">
             <div className="flex items-center justify-between">
               <h3 className="font-extrabold text-sm text-slate-900">
                 {isFree ? 'Instant Freebie Delivery' : 'Quick Instant Checkout'}
               </h3>
               <span className="text-[10px] font-bold text-slate-400 flex items-center gap-1">
-                <Lock className="w-3 h-3 text-emerald-500" /> 256-bit SSL Secure
+                <Lock className="w-3 h-3 text-emerald-600" /> 256-bit SSL Secure
               </span>
             </div>
 
@@ -300,7 +300,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                   placeholder="e.g. Sarah Jenkins"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs bg-white focus:outline-none focus:ring-2 focus:ring-amber-400"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 />
               </div>
 
@@ -314,7 +314,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                   placeholder="name@email.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs bg-white focus:outline-none focus:ring-2 focus:ring-amber-400"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 />
               </div>
 
@@ -323,8 +323,8 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                 disabled={isCheckingOut}
                 className={`w-full py-3.5 px-4 rounded-2xl font-extrabold text-sm shadow-playful hover:shadow-playful-hover transition-all flex items-center justify-center gap-2 cursor-pointer mt-2 ${
                   isFree
-                    ? 'bg-emerald-500 hover:bg-emerald-600 text-white'
-                    : 'bg-slate-900 hover:bg-slate-800 text-white'
+                    ? 'bg-emerald-600 hover:bg-emerald-700 text-white'
+                    : 'bg-amber-400 hover:bg-amber-500 text-slate-950 font-black shadow-playful-gold'
                 }`}
               >
                 {isCheckingOut ? (
@@ -334,7 +334,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                   </>
                 ) : (
                   <>
-                    <Download className="w-4 h-4 text-amber-300" />
+                    <Download className="w-4 h-4 text-emerald-800" />
                     <span>{isFree ? 'Download Free Activity Pack' : `Direct Checkout (${product.price.toFixed(2)})`}</span>
                   </>
                 )}

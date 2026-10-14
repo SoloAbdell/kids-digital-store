@@ -74,7 +74,7 @@ export default function AdminPage() {
     return (
       <div className="py-24 max-w-md mx-auto px-4">
         <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-xl text-center space-y-4">
-          <div className="w-12 h-12 bg-pink-100 text-pink-600 rounded-full flex items-center justify-center mx-auto text-xl">
+          <div className="w-12 h-12 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto text-xl">
             🔒
           </div>
           <h1 className="font-extrabold text-xl text-slate-900">Admin Marketplace Portal</h1>
@@ -86,7 +86,7 @@ export default function AdminPage() {
               placeholder="Enter passcode (demo: admin123)"
               value={passcode}
               onChange={(e) => setPasscode(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-pink-500"
+              className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
             />
             <button
               type="submit"
@@ -150,7 +150,7 @@ export default function AdminPage() {
         </div>
 
         <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-pink-100 text-pink-700 flex items-center justify-center">
+          <div className="w-12 h-12 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center">
             <Users className="w-6 h-6" />
           </div>
           <div>
@@ -164,7 +164,7 @@ export default function AdminPage() {
         {/* Upload / Add Form */}
         <div className="lg:col-span-5 bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/90 shadow-sm space-y-4">
           <div className="flex items-center gap-2">
-            <PlusCircle className="w-5 h-5 text-pink-500" />
+            <PlusCircle className="w-5 h-5 text-emerald-600" />
             <h2 className="font-extrabold text-base text-slate-900">Publish New Digital Download</h2>
           </div>
 
@@ -183,7 +183,7 @@ export default function AdminPage() {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="e.g. Dulo & Pippin's Starlight Adventure"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-pink-500 outline-none"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-emerald-500 outline-none"
               />
             </div>
 
@@ -194,7 +194,7 @@ export default function AdminPage() {
                 value={subtitle}
                 onChange={(e) => setSubtitle(e.target.value)}
                 placeholder="e.g. A 40-minute bedtime journey with calming audio"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-pink-500 outline-none"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-emerald-500 outline-none"
               />
             </div>
 
@@ -208,7 +208,7 @@ export default function AdminPage() {
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
                   placeholder="5.99"
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-pink-500 outline-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-emerald-500 outline-none"
                 />
               </div>
               <div>
@@ -218,7 +218,7 @@ export default function AdminPage() {
                   value={pagesOrDuration}
                   onChange={(e) => setPagesOrDuration(e.target.value)}
                   placeholder="e.g. 45 Min Audio or 40 Pages"
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-pink-500 outline-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-emerald-500 outline-none"
                 />
               </div>
             </div>
@@ -275,7 +275,7 @@ export default function AdminPage() {
                 value={mockupUrl}
                 onChange={(e) => setMockupUrl(e.target.value)}
                 placeholder="https://images.unsplash.com/..."
-                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-pink-500 outline-none"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-emerald-500 outline-none"
               />
             </div>
 
@@ -287,13 +287,13 @@ export default function AdminPage() {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Detailed breakdown of what buyers receive in their digital download..."
-                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-pink-500 outline-none"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-emerald-500 outline-none"
               />
             </div>
 
             <button
               type="submit"
-              className="w-full py-3 bg-pink-500 hover:bg-pink-600 text-white font-extrabold text-xs rounded-xl shadow-playful hover:shadow-playful-hover transition-all"
+              className="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs rounded-xl shadow-playful hover:shadow-playful-hover transition-all"
             >
               Publish Digital Asset
             </button>
@@ -340,7 +340,7 @@ export default function AdminPage() {
                   <a
                     href={`/product/${p.slug}`}
                     target="_blank"
-                    className="block text-[11px] font-bold text-pink-500 hover:underline mt-1"
+                    className="block text-[11px] font-bold text-emerald-600 hover:underline mt-1"
                   >
                     View PDP →
                   </a>

@@ -13,7 +13,8 @@ import {
   Eye, 
   Clock, 
   ArrowRight,
-  ShieldCheck
+  ShieldCheck,
+  Sparkles
 } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -60,21 +61,21 @@ export default function QuickViewModal() {
       {/* Backdrop */}
       <div
         onClick={handleClose}
-        className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity"
+        className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm transition-opacity"
       />
 
       <div className="relative w-full max-w-3xl bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-100 z-10 animate-in fade-in zoom-in-95 duration-200">
         {/* Close Button */}
         <button
           onClick={handleClose}
-          className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-slate-900/60 hover:bg-slate-900 text-white flex items-center justify-center transition-colors shadow-md"
+          className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-slate-900/60 hover:bg-slate-900 text-white flex items-center justify-center transition-colors shadow-md cursor-pointer"
         >
           <X className="w-5 h-5" />
         </button>
 
         <div className="grid grid-cols-1 md:grid-cols-2">
           {/* Left Column: Visual Preview */}
-          <div className="relative bg-slate-100 flex flex-col justify-between overflow-hidden">
+          <div className="relative bg-slate-50 flex flex-col justify-between overflow-hidden">
             <div className="relative aspect-square w-full">
               <img
                 src={product.thumbnail_url}
@@ -99,18 +100,18 @@ export default function QuickViewModal() {
               )}
 
               {/* Format Badge */}
-              <div className="absolute top-3 right-12 bg-white/90 backdrop-blur-sm text-slate-800 text-[10px] font-bold px-2.5 py-1 rounded-full shadow-sm">
+              <div className="absolute top-3 right-12 bg-white/95 backdrop-blur-sm text-slate-800 text-[10px] font-bold px-2.5 py-1 rounded-full shadow-xs border border-slate-200">
                 {product.format}
               </div>
             </div>
 
             {/* Audio Sample Player if applicable */}
             {product.category === 'audio' && (
-              <div className="p-4 bg-gradient-to-r from-violet-950 to-indigo-950 text-white flex items-center justify-between gap-3">
+              <div className="p-4 bg-gradient-to-r from-purple-950 to-slate-950 text-white flex items-center justify-between gap-3 border-t border-purple-800/40">
                 <div className="flex items-center gap-2.5">
                   <button
                     onClick={toggleAudio}
-                    className="w-10 h-10 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 flex items-center justify-center font-bold shadow-md transition-transform hover:scale-105"
+                    className="w-10 h-10 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 flex items-center justify-center font-bold shadow-md transition-transform hover:scale-105 cursor-pointer"
                   >
                     {isPlayingAudio ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 ml-0.5" />}
                   </button>
@@ -123,7 +124,7 @@ export default function QuickViewModal() {
                     </span>
                   </div>
                 </div>
-                <span className="text-[10px] text-violet-300 font-bold bg-violet-900/60 px-2 py-0.5 rounded">
+                <span className="text-[10px] text-purple-300 font-bold bg-purple-900/60 px-2 py-0.5 rounded">
                   MP3 320kbps
                 </span>
               </div>
@@ -134,12 +135,12 @@ export default function QuickViewModal() {
           <div className="p-6 sm:p-8 flex flex-col justify-between space-y-4">
             <div className="space-y-3">
               <div className="flex items-center gap-2">
-                <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-amber-100 text-amber-800">
+                <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-purple-50 text-purple-800 border border-purple-100">
                   {product.category}
                 </span>
                 {product.pages_or_duration && (
                   <span className="text-[10px] text-slate-500 font-semibold flex items-center gap-1">
-                    <Clock className="w-3 h-3 text-amber-500" />
+                    <Clock className="w-3 h-3 text-emerald-600" />
                     {product.pages_or_duration}
                   </span>
                 )}
@@ -182,9 +183,9 @@ export default function QuickViewModal() {
               {isFree ? (
                 <a
                   href={`/api/download/sample-${product.slug}`}
-                  className="w-full py-3 px-4 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs shadow-md transition-all flex items-center justify-center gap-2"
+                  className="w-full py-3 px-4 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs shadow-playful transition-all flex items-center justify-center gap-2"
                 >
-                  <Download className="w-4 h-4" />
+                  <Download className="w-4 h-4 text-amber-300" />
                   <span>Download Free Activity Pack</span>
                 </a>
               ) : (
@@ -194,7 +195,7 @@ export default function QuickViewModal() {
                       addToCart(product);
                       handleClose();
                     }}
-                    className="py-3 px-3 rounded-2xl bg-amber-400 hover:bg-amber-500 text-slate-950 font-black text-xs shadow-playful hover:shadow-playful-hover transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                    className="py-3 px-3 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs shadow-playful hover:shadow-playful-hover transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                   >
                     <ShoppingBag className="w-3.5 h-3.5" />
                     <span>Add to Cart</span>
@@ -203,7 +204,7 @@ export default function QuickViewModal() {
                   <Link
                     href={`/product/${product.slug}`}
                     onClick={handleClose}
-                    className="py-3 px-3 rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs shadow-sm transition-all flex items-center justify-center gap-1"
+                    className="py-3 px-3 rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs shadow-xs transition-all flex items-center justify-center gap-1"
                   >
                     <span>Full Details</span>
                     <ArrowRight className="w-3.5 h-3.5" />

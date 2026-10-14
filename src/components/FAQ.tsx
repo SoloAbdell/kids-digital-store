@@ -31,7 +31,7 @@ export default function FAQ() {
   return (
     <section id="faq" className="py-16 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="text-center mb-10">
-        <span className="text-xs font-bold uppercase tracking-wider text-pink-600 bg-pink-100 px-3 py-1 rounded-full">
+        <span className="text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-100 border border-emerald-200 px-3.5 py-1 rounded-full">
           Got Questions?
         </span>
         <h2 className="text-3xl font-black text-slate-900 mt-3">Frequently Asked Questions</h2>
@@ -42,7 +42,7 @@ export default function FAQ() {
         {faqs.map((faq, idx) => (
           <details
             key={idx}
-            className="group bg-white rounded-2xl border border-slate-200/80 p-5 open:ring-2 open:ring-pink-100 transition-all cursor-pointer"
+            className="group bg-white rounded-2xl border border-slate-200/80 p-5 open:ring-2 open:ring-emerald-200 transition-all cursor-pointer"
           >
             <summary className="flex items-center justify-between font-bold text-slate-800 text-sm sm:text-base list-none">
               <span className="flex items-center gap-3">

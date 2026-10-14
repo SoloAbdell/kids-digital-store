@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <defs>
+    <linearGradient id="dragonGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22C55E"/>
+      <stop offset="100%" stop-color="#16A34A"/>
+    </linearGradient>
+    <linearGradient id="magicViolet" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C084FC"/>
+      <stop offset="100%" stop-color="#7C3AED"/>
+    </linearGradient>
+    <linearGradient id="sunnyGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBBF24"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Friendly Baby Dragon Silhouette / Icon -->
+  <rect width="100" height="100" rx="26" fill="url(#dragonGreen)" />
+  
+  <!-- Wings in Magical Violet -->
+  <path d="M 62 30 C 78 18, 86 36, 74 46 C 84 52, 76 68, 60 58 Z" fill="url(#magicViolet)" opacity="0.95" />
+  
+  <!-- Dragon Belly & Head Contour -->
+  <circle cx="44" cy="42" r="22" fill="#FFFFFF" opacity="0.12" />
+  <circle cx="42" cy="40" r="18" fill="#15803D" />
+
+  <!-- Big Cute Dragon Eyes -->
+  <ellipse cx="36" cy="38" rx="4" ry="5.5" fill="#0F172A" />
+  <circle cx="35" cy="36" r="1.8" fill="#FFFFFF" />
+  <ellipse cx="46" cy="38" rx="4" ry="5.5" fill="#0F172A" />
+  <circle cx="45" cy="36" r="1.8" fill="#FFFFFF" />
+
+  <!-- Friendly Smile -->
+  <path d="M 38 46 Q 41 50 45 46" stroke="#0F172A" stroke-width="2" stroke-linecap="round" fill="none" />
+
+  <!-- Cute Little Dragon Horns (Violet) -->
+  <path d="M 33 24 Q 31 16 38 22 Z" fill="url(#magicViolet)" />
+  <path d="M 46 22 Q 52 16 50 24 Z" fill="url(#magicViolet)" />
+
+  <!-- Dragon Breath of Starlight Sparks (Sunny Gold) -->
+  <path d="M 58 42 Q 68 40 70 34 Q 72 42 80 44 Q 72 46 70 54 Q 68 46 58 42 Z" fill="url(#sunnyGold)" />
+  <circle cx="76" cy="28" r="3" fill="url(#sunnyGold)" />
+  <circle cx="82" cy="56" r="2.5" fill="url(#sunnyGold)" />
+</svg>
