@@ -7,8 +7,8 @@ import CartDrawer from '@/components/CartDrawer';
 import QuickViewModal from '@/components/QuickViewModal';
 
 export const metadata: Metadata = {
-  title: 'Tagline | Your Cozy Hub for Digital Crafts, Stories & Learning',
-  description: 'Discover downloadable eBooks, creative paper crafts, bedtime audiobooks, and fun learning activities for the whole family at Tagline.',
+  title: 'DULO TOONS | Digital Products for Every Dream',
+  description: 'Digital Products for Every Dream: Planners, Templates, Printables, Workbooks, Coloring Books, Wall Art, and Bundles for children & parents.',
 };
 
 export default function RootLayout({

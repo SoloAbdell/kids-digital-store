@@ -26,11 +26,11 @@ export default function HomePage() {
       <section id="why-us" className="py-16 bg-gradient-to-b from-emerald-50/40 via-purple-50/20 to-white border-y border-emerald-100/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-xs font-black uppercase tracking-wider text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-200">
-              About Tagline
+            <span className="text-xs font-black uppercase tracking-wider text-amber-800 bg-amber-100 px-3 py-1 rounded-full border border-amber-200">
+              About DULO TOONS
             </span>
             <h2 className="text-3xl font-black text-slate-900 mt-3">
-              Your Cozy Hub for Digital Crafts, Stories & Learning
+              Digital Products for Every Dream
             </h2>
             <p className="text-sm text-slate-600 mt-2">
               We design wholesome digital goods that inspire hands-on creativity and peaceful bedtime routines away from addictive screen feeds.

@@ -1,5 +1,5 @@
 import { ShieldCheck, Heart, Printer, Clock, Sparkles } from 'lucide-react';
-import BrandLogo from './BrandLogo';
+import DuloToonsLogo from './DuloToonsLogo';
 
 export default function Footer() {
   return (
@@ -9,11 +9,10 @@ export default function Footer() {
           {/* Brand Info */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <BrandLogo className="w-9 h-9" />
-              <span className="text-2xl font-black text-white tracking-tight">Tagline</span>
+              <DuloToonsLogo size="sm" />
             </div>
             <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
-              Your Cozy Hub for Digital Crafts, Stories & Learning. Downloadable assets, bedtime audiobooks, and screen-free educational crafts for the whole family.
+              Digital Products for Every Dream. Downloadable assets, bedtime audiobooks, and screen-free educational crafts for the whole family.
             </p>
             <div className="flex items-center gap-2 text-xs text-amber-300 bg-slate-900/90 p-2.5 rounded-2xl border border-emerald-900/50">
               <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />

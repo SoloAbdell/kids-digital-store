@@ -72,7 +72,7 @@ export default function CategoryExplorer({ onSelectCategory }: CategoryExplorerP
   };
 
   return (
-    <section className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="categories" className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 mb-8">
         <div>
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 font-extrabold text-xs mb-2">
