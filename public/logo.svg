@@ -1,44 +1,70 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
   <defs>
-    <linearGradient id="dragonGreen" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#22C55E"/>
-      <stop offset="100%" stop-color="#16A34A"/>
-    </linearGradient>
-    <linearGradient id="magicViolet" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#C084FC"/>
-      <stop offset="100%" stop-color="#7C3AED"/>
-    </linearGradient>
-    <linearGradient id="sunnyGold" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#FBBF24"/>
+    <radialGradient id="bgGlow" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#FEF3C7"/>
+      <stop offset="60%" stop-color="#FDE68A"/>
       <stop offset="100%" stop-color="#F59E0B"/>
+    </radialGradient>
+    <linearGradient id="dragonWhite" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#F1F5F9"/>
     </linearGradient>
+    <linearGradient id="crownGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE047"/>
+      <stop offset="50%" stop-color="#EAB308"/>
+      <stop offset="100%" stop-color="#CA8A04"/>
+    </linearGradient>
+    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-opacity="0.15"/>
+    </filter>
   </defs>
 
-  <!-- Friendly Baby Dragon Silhouette / Icon -->
-  <rect width="100" height="100" rx="26" fill="url(#dragonGreen)" />
-  
-  <!-- Wings in Magical Violet -->
-  <path d="M 62 30 C 78 18, 86 36, 74 46 C 84 52, 76 68, 60 58 Z" fill="url(#magicViolet)" opacity="0.95" />
-  
-  <!-- Dragon Belly & Head Contour -->
-  <circle cx="44" cy="42" r="22" fill="#FFFFFF" opacity="0.12" />
-  <circle cx="42" cy="40" r="18" fill="#15803D" />
+  <!-- Circular Badge Surface with Golden Glow -->
+  <circle cx="60" cy="60" r="56" fill="url(#bgGlow)" stroke="#1E293B" stroke-width="4" filter="url(#softShadow)"/>
+  <circle cx="60" cy="60" r="50" fill="#FFFDF8" opacity="0.9"/>
 
-  <!-- Big Cute Dragon Eyes -->
-  <ellipse cx="36" cy="38" rx="4" ry="5.5" fill="#0F172A" />
-  <circle cx="35" cy="36" r="1.8" fill="#FFFFFF" />
-  <ellipse cx="46" cy="38" rx="4" ry="5.5" fill="#0F172A" />
-  <circle cx="45" cy="36" r="1.8" fill="#FFFFFF" />
+  <!-- Golden Royal Crown on Top -->
+  <g transform="translate(42, 16)">
+    <path d="M2 22 L8 8 L18 16 L28 8 L34 22 Z" fill="url(#crownGold)" stroke="#1E293B" stroke-width="2.5" stroke-linejoin="round"/>
+    <circle cx="8" cy="8" r="2.5" fill="#EF4444" stroke="#1E293B" stroke-width="1"/>
+    <circle cx="18" cy="16" r="2.5" fill="#3B82F6" stroke="#1E293B" stroke-width="1"/>
+    <circle cx="28" cy="8" r="2.5" fill="#10B981" stroke="#1E293B" stroke-width="1"/>
+    <ellipse cx="18" cy="22" rx="16" ry="2" fill="#CA8A04"/>
+  </g>
 
-  <!-- Friendly Smile -->
-  <path d="M 38 46 Q 41 50 45 46" stroke="#0F172A" stroke-width="2" stroke-linecap="round" fill="none" />
+  <!-- Baby Dragon Head & Body -->
+  <!-- Cute Horns (Golden/Amber) -->
+  <path d="M38 46 C32 36, 36 28, 44 34 Z" fill="url(#crownGold)" stroke="#1E293B" stroke-width="2.5"/>
+  <path d="M82 46 C88 36, 84 28, 76 34 Z" fill="url(#crownGold)" stroke="#1E293B" stroke-width="2.5"/>
 
-  <!-- Cute Little Dragon Horns (Violet) -->
-  <path d="M 33 24 Q 31 16 38 22 Z" fill="url(#magicViolet)" />
-  <path d="M 46 22 Q 52 16 50 24 Z" fill="url(#magicViolet)" />
+  <!-- Head Shape -->
+  <ellipse cx="60" cy="66" rx="30" ry="26" fill="url(#dragonWhite)" stroke="#1E293B" stroke-width="3.5"/>
 
-  <!-- Dragon Breath of Starlight Sparks (Sunny Gold) -->
-  <path d="M 58 42 Q 68 40 70 34 Q 72 42 80 44 Q 72 46 70 54 Q 68 46 58 42 Z" fill="url(#sunnyGold)" />
-  <circle cx="76" cy="28" r="3" fill="url(#sunnyGold)" />
-  <circle cx="82" cy="56" r="2.5" fill="url(#sunnyGold)" />
+  <!-- Cute Rosy Cheeks -->
+  <circle cx="39" cy="72" r="5.5" fill="#FCA5A5" opacity="0.6"/>
+  <circle cx="81" cy="72" r="5.5" fill="#FCA5A5" opacity="0.6"/>
+
+  <!-- Big Sparkling Anime/Pixar Eyes -->
+  <g>
+    <ellipse cx="48" cy="62" rx="6" ry="8" fill="#1E293B"/>
+    <circle cx="46" cy="59" r="2.5" fill="#FFFFFF"/>
+    <circle cx="50" cy="65" r="1.2" fill="#FFFFFF"/>
+  </g>
+  <g>
+    <ellipse cx="72" cy="62" rx="6" ry="8" fill="#1E293B"/>
+    <circle cx="70" cy="59" r="2.5" fill="#FFFFFF"/>
+    <circle cx="74" cy="65" r="1.2" fill="#FFFFFF"/>
+  </g>
+
+  <!-- Tiny Dragon Snout & Cute Smile -->
+  <ellipse cx="60" cy="71" rx="4" ry="2.5" fill="#FDE68A" opacity="0.7"/>
+  <path d="M54 75 Q60 81 66 75" stroke="#1E293B" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+  <!-- Tiny Dragon Wings (Golden tips) -->
+  <path d="M26 68 C16 62, 14 76, 26 80 Z" fill="url(#crownGold)" stroke="#1E293B" stroke-width="2"/>
+  <path d="M94 68 C104 62, 106 76, 94 80 Z" fill="url(#crownGold)" stroke="#1E293B" stroke-width="2"/>
+
+  <!-- Starlight Sparkle beside head -->
+  <path d="M92 38 Q95 34 98 38 Q95 42 92 38 Z" fill="#F59E0B"/>
+  <circle cx="28" cy="40" r="1.5" fill="#F59E0B"/>
 </svg>
