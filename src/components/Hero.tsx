@@ -35,7 +35,7 @@ export default function Hero() {
         </p>
 
         {/* Core Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
           {/* Primary CTA: Dragon Green */}
           <a
             href="#catalog"
@@ -53,6 +53,16 @@ export default function Hero() {
             <Sparkles className="w-5 h-5 text-amber-900" />
             <span>Get Free Activity Pack</span>
           </a>
+        </div>
+
+        {/* Hero Visual Banner Showcase */}
+        <div className="relative max-w-5xl mx-auto mb-14 rounded-3xl overflow-hidden border-4 border-white shadow-2xl ring-1 ring-slate-200/60 group">
+          <img
+            src="/hero-banner.jpg"
+            alt="Tagline Digital Crafts & Stories Universe"
+            className="w-full h-auto object-cover group-hover:scale-[1.01] transition-transform duration-700"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/20 via-transparent to-transparent pointer-events-none" />
         </div>
 
         {/* Core Logo-Color Value Prop Badges */}
