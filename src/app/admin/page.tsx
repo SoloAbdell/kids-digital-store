@@ -16,7 +16,7 @@ export default function AdminPage() {
   const [price, setPrice] = useState('');
   const [pagesOrDuration, setPagesOrDuration] = useState('');
   const [category, setCategory] = useState<Category>('ebooks');
-  const [format, setFormat] = useState<ProductFormat>('Instant PDF');
+  const [format, setFormat] = useState<ProductFormat>('PDF Download');
   const [isDuloToons, setIsDuloToons] = useState(false);
   const [mockupUrl, setMockupUrl] = useState('');
   const [description, setDescription] = useState('');
@@ -229,13 +229,13 @@ export default function AdminPage() {
                 <select
                   value={category}
                   onChange={(e) => setCategory(e.target.value as any)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs bg-white focus:ring-2 focus:ring-pink-500 outline-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs bg-white focus:ring-2 focus:ring-amber-400 outline-none"
                 >
-                  <option value="ebooks">eBooks & Guides</option>
-                  <option value="printables">Printables & Crafts</option>
-                  <option value="audio">Audiobooks & Audio Tracks</option>
+                  <option value="ebooks">eBooks & Digital Stories</option>
+                  <option value="printables">Printable Crafts & Activities</option>
+                  <option value="audio">Audiobooks & Bedtime Audio</option>
                   <option value="educational">Educational Workbooks</option>
-                  <option value="planners">Planners & Trackers</option>
+                  <option value="planners">Planners & Creative Trackers</option>
                 </select>
               </div>
               <div>
@@ -243,13 +243,13 @@ export default function AdminPage() {
                 <select
                   value={format}
                   onChange={(e) => setFormat(e.target.value as any)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs bg-white focus:ring-2 focus:ring-pink-500 outline-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs bg-white focus:ring-2 focus:ring-amber-400 outline-none"
                 >
-                  <option value="Instant PDF">Instant PDF</option>
-                  <option value="MP3 Audio">MP3 Audio</option>
-                  <option value="ZIP Pack">ZIP Pack</option>
-                  <option value="EPUB / PDF">EPUB / PDF</option>
-                  <option value="Printable Sheet">Printable Sheet</option>
+                  <option value="PDF Download">PDF Download</option>
+                  <option value="Audio MP3">Audio MP3</option>
+                  <option value="Craft Pack">Craft Pack</option>
+                  <option value="Printable Kit">Printable Kit</option>
+                  <option value="EPUB / eBook">EPUB / eBook</option>
                 </select>
               </div>
             </div>

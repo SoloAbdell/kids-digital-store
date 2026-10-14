@@ -5,14 +5,14 @@ export type Category =
   | 'printables' 
   | 'audio' 
   | 'educational' 
-  | 'planners'
-  | 'bundles';
+  | 'planners';
 
 export type ProductFormat = 
-  | 'Instant PDF' 
-  | 'MP3 Audio' 
-  | 'ZIP Pack' 
-  | 'EPUB / PDF' 
+  | 'PDF Download' 
+  | 'Audio MP3' 
+  | 'Craft Pack' 
+  | 'Printable Kit' 
+  | 'EPUB / eBook'
   | 'Printable Sheet';
 
 export interface Product {
@@ -38,6 +38,11 @@ export interface Product {
   audio_sample_url?: string;
   rating?: number;
   reviews_count?: number;
+}
+
+export interface CartItem {
+  product: Product;
+  quantity: number;
 }
 
 export interface Order {

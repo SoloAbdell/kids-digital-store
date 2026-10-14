@@ -13,7 +13,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     price: 4.99,
     currency: "USD",
     category: "audio",
-    format: "MP3 Audio",
+    format: "Audio MP3",
     age_group: "3-5",
     pages_or_duration: "38 Min Audio + 24 Page PDF",
     pages_count: 24,
@@ -39,7 +39,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     price: 5.99,
     currency: "USD",
     category: "printables",
-    format: "Instant PDF",
+    format: "PDF Download",
     age_group: "3-5",
     pages_or_duration: "45 Printable Pages",
     pages_count: 45,
@@ -64,7 +64,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     price: 6.50,
     currency: "USD",
     category: "printables",
-    format: "ZIP Pack",
+    format: "Craft Pack",
     age_group: "6-8",
     pages_or_duration: "18 Template Sheets + Video Guide",
     pages_count: 18,
@@ -88,7 +88,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     price: 0.00,
     currency: "USD",
     category: "educational",
-    format: "Instant PDF",
+    format: "PDF Download",
     age_group: "3-5",
     pages_or_duration: "12 Pages (Instant Freebie)",
     pages_count: 12,
@@ -106,7 +106,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
   },
 
   // ==========================================
-  // EBOOKS & GUIDES
+  // EBOOKS & DIGITAL STORIES
   // ==========================================
   {
     id: "ebook_1",
@@ -117,7 +117,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     price: 11.99,
     currency: "USD",
     category: "ebooks",
-    format: "EPUB / PDF",
+    format: "EPUB / eBook",
     age_group: "parents",
     pages_or_duration: "148 Pages (ePub + PDF Bundle)",
     pages_count: 148,
@@ -141,7 +141,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     price: 7.99,
     currency: "USD",
     category: "ebooks",
-    format: "EPUB / PDF",
+    format: "EPUB / eBook",
     age_group: "3-5",
     pages_or_duration: "112 Illustrated Pages",
     pages_count: 112,
@@ -157,7 +157,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
   },
 
   // ==========================================
-  // PRINTABLES & CRAFTS
+  // PRINTABLE CRAFTS & ACTIVITIES
   // ==========================================
   {
     id: "craft_1",
@@ -168,7 +168,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     price: 5.99,
     currency: "USD",
     category: "printables",
-    format: "Instant PDF",
+    format: "PDF Download",
     age_group: "3-5",
     pages_or_duration: "35 High-Res Sheets",
     pages_count: 35,
@@ -192,7 +192,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     price: 7.49,
     currency: "USD",
     category: "printables",
-    format: "ZIP Pack",
+    format: "Craft Pack",
     age_group: "6-8",
     pages_or_duration: "20 Printable Activity Sheets",
     pages_count: 20,
@@ -208,7 +208,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
   },
 
   // ==========================================
-  // AUDIOBOOKS & AUDIO TRACKS
+  // AUDIOBOOKS & BEDTIME AUDIO
   // ==========================================
   {
     id: "audio_1",
@@ -219,7 +219,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     price: 8.99,
     currency: "USD",
     category: "audio",
-    format: "MP3 Audio",
+    format: "Audio MP3",
     age_group: "all",
     pages_or_duration: "65 Min Audio (8 MP3 Tracks)",
     pages_count: 8,
@@ -243,7 +243,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     price: 9.50,
     currency: "USD",
     category: "audio",
-    format: "MP3 Audio",
+    format: "Audio MP3",
     age_group: "6-8",
     pages_or_duration: "85 Min Audio (14 Tracks + PDF Map)",
     pages_count: 14,
@@ -260,7 +260,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
   },
 
   // ==========================================
-  // EDUCATIONAL & LEARNING WORKBOOKS
+  // EDUCATIONAL WORKBOOKS
   // ==========================================
   {
     id: "edu_1",
@@ -271,7 +271,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     price: 8.99,
     currency: "USD",
     category: "educational",
-    format: "Instant PDF",
+    format: "PDF Download",
     age_group: "3-5",
     pages_or_duration: "55 Educational Pages",
     pages_count: 55,
@@ -294,7 +294,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     price: 6.99,
     currency: "USD",
     category: "educational",
-    format: "Instant PDF",
+    format: "PDF Download",
     age_group: "6-8",
     pages_or_duration: "32 Puzzle Pages + Solutions",
     pages_count: 32,
@@ -310,7 +310,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
   },
 
   // ==========================================
-  // PLANNERS & TRACKERS
+  // PLANNERS & CREATIVE TRACKERS
   // ==========================================
   {
     id: "plan_1",
@@ -321,7 +321,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     price: 9.99,
     currency: "USD",
     category: "planners",
-    format: "Instant PDF",
+    format: "PDF Download",
     age_group: "parents",
     pages_or_duration: "64 Printable & Fillable Sheets",
     pages_count: 64,
@@ -344,7 +344,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     price: 4.49,
     currency: "USD",
     category: "planners",
-    format: "Printable Sheet",
+    format: "Printable Kit",
     age_group: "3-5",
     pages_or_duration: "10 Visual Charts + Star Badges",
     pages_count: 10,
@@ -367,7 +367,7 @@ export const SAMPLE_PRODUCTS: Product[] = [
     price: 0.00,
     currency: "USD",
     category: "planners",
-    format: "Instant PDF",
+    format: "PDF Download",
     age_group: "parents",
     pages_or_duration: "6 Printable Organizer Templates",
     pages_count: 6,
@@ -393,19 +393,55 @@ export function getDuloToonsProducts(): Product[] {
 }
 
 export const CATEGORIES_LIST = [
-  { id: 'all', name: 'All Products', icon: '✨', count: SAMPLE_PRODUCTS.length },
-  { id: 'ebooks', name: 'eBooks & Guides', icon: '📚', count: SAMPLE_PRODUCTS.filter(p => p.category === 'ebooks').length },
-  { id: 'printables', name: 'Printables & Crafts', icon: '✂️', count: SAMPLE_PRODUCTS.filter(p => p.category === 'printables').length },
-  { id: 'audio', name: 'Audiobooks & Audio Tracks', icon: '🎧', count: SAMPLE_PRODUCTS.filter(p => p.category === 'audio').length },
-  { id: 'educational', name: 'Educational Workbooks', icon: '🧩', count: SAMPLE_PRODUCTS.filter(p => p.category === 'educational').length },
-  { id: 'planners', name: 'Planners & Trackers', icon: '📋', count: SAMPLE_PRODUCTS.filter(p => p.category === 'planners').length },
+  { 
+    id: 'all', 
+    name: 'All Products', 
+    icon: '✨', 
+    desc: 'Browse complete catalog',
+    count: SAMPLE_PRODUCTS.length 
+  },
+  { 
+    id: 'ebooks', 
+    name: 'eBooks & Digital Stories', 
+    icon: '📚', 
+    desc: 'Illustrated books & guides',
+    count: SAMPLE_PRODUCTS.filter(p => p.category === 'ebooks').length 
+  },
+  { 
+    id: 'printables', 
+    name: 'Printable Crafts & Activities', 
+    icon: '✂️', 
+    desc: 'Coloring, DIY & 3D cutouts',
+    count: SAMPLE_PRODUCTS.filter(p => p.category === 'printables').length 
+  },
+  { 
+    id: 'audio', 
+    name: 'Audiobooks & Bedtime Audio', 
+    icon: '🎧', 
+    desc: 'Audio adventures & sleep tales',
+    count: SAMPLE_PRODUCTS.filter(p => p.category === 'audio').length 
+  },
+  { 
+    id: 'educational', 
+    name: 'Educational Workbooks', 
+    icon: '🧩', 
+    desc: 'Tracing, math & logic puzzles',
+    count: SAMPLE_PRODUCTS.filter(p => p.category === 'educational').length 
+  },
+  { 
+    id: 'planners', 
+    name: 'Planners & Creative Trackers', 
+    icon: '📋', 
+    desc: 'Organizers & habit journals',
+    count: SAMPLE_PRODUCTS.filter(p => p.category === 'planners').length 
+  },
 ];
 
 export const FORMATS_LIST = [
   'All Formats',
-  'Instant PDF',
-  'MP3 Audio',
-  'ZIP Pack',
-  'EPUB / PDF',
-  'Printable Sheet',
+  'PDF Download',
+  'Audio MP3',
+  'Craft Pack',
+  'Printable Kit',
+  'EPUB / eBook',
 ];

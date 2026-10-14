@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { notFound } from 'next/navigation';
 import { getProductBySlug } from '@/lib/products';
+import { useCart } from '@/context/CartContext';
 import { 
   FileText, 
   Printer, 
@@ -21,12 +22,14 @@ import {
   BookOpen,
   Archive,
   Volume2,
-  Star
+  Star,
+  ShoppingBag
 } from 'lucide-react';
 import Link from 'next/link';
 
 export default function ProductDetailPage({ params }: { params: { slug: string } }) {
   const product = getProductBySlug(params.slug);
+  const { addToCart } = useCart();
   const [selectedPreview, setSelectedPreview] = useState<number>(0);
   const [isCheckingOut, setIsCheckingOut] = useState<boolean>(false);
   const [email, setEmail] = useState<string>('');
@@ -66,7 +69,6 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
     setIsCheckingOut(true);
 
     if (isFree) {
-      // Free download direct flow
       window.location.href = `/api/download/sample-${product.slug}`;
       return;
     }
@@ -86,7 +88,6 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
       if (data.url) {
         window.location.href = data.url;
       } else {
-        // Fallback for simulation / direct demo
         window.location.href = `/success?session_id=demo_session_${product.id}&productId=${product.id}`;
       }
     } catch (err) {
@@ -101,7 +102,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
         href="/#catalog"
         className="inline-flex items-center gap-2 text-xs font-bold text-slate-500 hover:text-slate-900 mb-8 transition-colors"
       >
-        <ArrowLeft className="w-4 h-4" /> Back to Digital Marketplace
+        <ArrowLeft className="w-4 h-4" /> Back to Tagline Marketplace
       </Link>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
@@ -149,7 +150,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
               <div className="flex items-center gap-3">
                 <button
                   onClick={toggleAudio}
-                  className="w-12 h-12 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 flex items-center justify-center font-bold shadow-md transition-transform hover:scale-105"
+                  className="w-12 h-12 rounded-2xl bg-amber-400 hover:bg-amber-300 text-slate-950 flex items-center justify-center font-bold shadow-md transition-transform hover:scale-105 cursor-pointer"
                 >
                   {isPlayingAudio ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5 ml-0.5" />}
                 </button>
@@ -176,7 +177,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                   key={idx}
                   onClick={() => setSelectedPreview(idx)}
                   className={`w-20 h-20 rounded-2xl overflow-hidden border-2 transition-all shrink-0 ${
-                    selectedPreview === idx ? 'border-pink-500 scale-105 shadow-md' : 'border-slate-200 opacity-70'
+                    selectedPreview === idx ? 'border-amber-400 scale-105 shadow-md' : 'border-slate-200 opacity-70'
                   }`}
                 >
                   <img src={img} alt="Thumbnail preview" className="w-full h-full object-cover" />
@@ -192,7 +193,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
             </h4>
             <ul className="space-y-1.5 text-slate-600">
               <li>• <strong>Format:</strong> {product.format} ({product.pages_or_duration || 'Instant Download'})</li>
-              <li>• <strong>Delivery:</strong> Direct instant browser download + backup link sent to your email.</li>
+              <li>• <strong>Delivery:</strong> Direct instant browser download + permanent backup sent to your email.</li>
               <li>• <strong>Device Compatibility:</strong> Works on iOS, Android, Mac, Windows, Kindle, and home printers.</li>
               <li>• <strong>License:</strong> Lifetime personal and home educational use license.</li>
             </ul>
@@ -266,11 +267,22 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
             </div>
           </div>
 
+          {/* Cart Action Button */}
+          {!isFree && (
+            <button
+              onClick={() => addToCart(product)}
+              className="w-full py-3.5 px-4 rounded-2xl bg-amber-400 hover:bg-amber-500 text-slate-950 font-black text-sm shadow-playful hover:shadow-playful-hover transition-all flex items-center justify-center gap-2 cursor-pointer"
+            >
+              <ShoppingBag className="w-4 h-4" />
+              <span>Add to Cart (${product.price.toFixed(2)})</span>
+            </button>
+          )}
+
           {/* Guest Checkout or Free Download Box */}
           <div className="bg-slate-50 p-6 rounded-3xl border border-slate-200/90 shadow-sm space-y-4">
             <div className="flex items-center justify-between">
               <h3 className="font-extrabold text-sm text-slate-900">
-                {isFree ? 'Instant Freebie Delivery' : 'Quick Guest Checkout'}
+                {isFree ? 'Instant Freebie Delivery' : 'Quick Instant Checkout'}
               </h3>
               <span className="text-[10px] font-bold text-slate-400 flex items-center gap-1">
                 <Lock className="w-3 h-3 text-emerald-500" /> 256-bit SSL Secure
@@ -288,7 +300,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                   placeholder="e.g. Sarah Jenkins"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs bg-white focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs bg-white focus:outline-none focus:ring-2 focus:ring-amber-400"
                 />
               </div>
 
@@ -302,7 +314,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                   placeholder="name@email.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs bg-white focus:outline-none focus:ring-2 focus:ring-pink-500"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs bg-white focus:outline-none focus:ring-2 focus:ring-amber-400"
                 />
               </div>
 
@@ -312,7 +324,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                 className={`w-full py-3.5 px-4 rounded-2xl font-extrabold text-sm shadow-playful hover:shadow-playful-hover transition-all flex items-center justify-center gap-2 cursor-pointer mt-2 ${
                   isFree
                     ? 'bg-emerald-500 hover:bg-emerald-600 text-white'
-                    : 'bg-pink-500 hover:bg-pink-600 text-white'
+                    : 'bg-slate-900 hover:bg-slate-800 text-white'
                 }`}
               >
                 {isCheckingOut ? (
@@ -322,8 +334,8 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                   </>
                 ) : (
                   <>
-                    <Download className="w-4 h-4" />
-                    <span>{isFree ? 'Download Free Activity Pack' : `Buy Now & Download ($${product.price.toFixed(2)})`}</span>
+                    <Download className="w-4 h-4 text-amber-300" />
+                    <span>{isFree ? 'Download Free Activity Pack' : `Direct Checkout (${product.price.toFixed(2)})`}</span>
                   </>
                 )}
               </button>

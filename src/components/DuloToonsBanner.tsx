@@ -2,8 +2,9 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Sparkles, Headphones, Palette, Scissors, Gift, Play, Pause, Volume2, ArrowRight, Star } from 'lucide-react';
+import { Sparkles, Headphones, Palette, Scissors, Gift, Play, Pause, Volume2, ArrowRight, Star, Eye } from 'lucide-react';
 import { Product } from '@/lib/types';
+import { useCart } from '@/context/CartContext';
 
 interface DuloToonsBannerProps {
   products: Product[];
@@ -12,6 +13,7 @@ interface DuloToonsBannerProps {
 
 export default function DuloToonsBanner({ products, onSelectDuloFilter }: DuloToonsBannerProps) {
   const duloProducts = products.filter((p) => p.is_dulo_toons);
+  const { setQuickViewProduct } = useCart();
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
   const [audioElement, setAudioElement] = useState<HTMLAudioElement | null>(null);
 
@@ -33,6 +35,16 @@ export default function DuloToonsBanner({ products, onSelectDuloFilter }: DuloTo
     }
   };
 
+  const handleBrowseDulo = () => {
+    if (onSelectDuloFilter) {
+      onSelectDuloFilter();
+    }
+    const catalogEl = document.getElementById('catalog');
+    if (catalogEl) {
+      catalogEl.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section id="dulo-toons" className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-900 via-teal-950 to-indigo-950 text-white shadow-2xl border border-emerald-500/30">
@@ -46,9 +58,9 @@ export default function DuloToonsBanner({ products, onSelectDuloFilter }: DuloTo
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 pb-8 border-b border-emerald-800/60">
             <div className="space-y-3 max-w-2xl">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-xs font-black tracking-wide uppercase">
-                <span>🐉 Official Featured Franchise</span>
+                <span>🐉 Featured Universe Spotlight</span>
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-                <span className="text-amber-300 font-bold">DULO TOONS Universe</span>
+                <span className="text-amber-300 font-bold">DULO TOONS</span>
               </div>
 
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
@@ -56,7 +68,7 @@ export default function DuloToonsBanner({ products, onSelectDuloFilter }: DuloTo
               </h2>
 
               <p className="text-emerald-100/90 text-sm sm:text-base leading-relaxed">
-                Step into the enchanting world of Dulo—the gentle baby dragon who sneezes warm starlight sparks instead of fire! Explore our exclusive collection of bedtime audio tales, 3D fold-and-fly craft kits, and giant coloring sheets.
+                Step into the enchanting world of Dulo—the adorable baby dragon who sneezes warm starlight sparks instead of fire! Explore our exclusive collection of bedtime audio stories, 3D dragon crafts, and printable coloring sheets.
               </p>
             </div>
 
@@ -66,7 +78,7 @@ export default function DuloToonsBanner({ products, onSelectDuloFilter }: DuloTo
                 <button
                   onClick={toggleAudio}
                   aria-label="Toggle Dulo bedtime sound preview"
-                  className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 flex items-center justify-center font-bold shadow-lg transition-transform hover:scale-105"
+                  className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 flex items-center justify-center font-bold shadow-lg transition-transform hover:scale-105 cursor-pointer"
                 >
                   {isPlayingAudio ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5 ml-0.5" />}
                 </button>
@@ -75,7 +87,7 @@ export default function DuloToonsBanner({ products, onSelectDuloFilter }: DuloTo
                     <Volume2 className="w-3.5 h-3.5" /> Bedtime Audio Sample
                   </span>
                   <span className="text-xs text-white font-semibold">
-                    {isPlayingAudio ? "Playing: Whispering Woods Preview" : "Listen to Dulo's Calming Tale"}
+                    {isPlayingAudio ? "Playing: Whispering Woods Story" : "Listen to Dulo's Calming Tale"}
                   </span>
                 </div>
               </div>
@@ -119,16 +131,19 @@ export default function DuloToonsBanner({ products, onSelectDuloFilter }: DuloTo
                 </div>
 
                 <div className="pt-4 mt-3 border-t border-emerald-800/60 flex items-center justify-between">
-                  <span className="text-[10px] font-bold text-amber-300 flex items-center gap-1">
-                    <Star className="w-3 h-3 fill-current text-amber-400" />
-                    <span>{item.rating || 5.0} ({item.reviews_count || 50}+)</span>
-                  </span>
+                  <button
+                    onClick={() => setQuickViewProduct(item)}
+                    className="inline-flex items-center gap-1 text-xs font-bold text-amber-300 hover:text-white transition-colors cursor-pointer"
+                  >
+                    <Eye className="w-3.5 h-3.5" />
+                    <span>Quick Preview</span>
+                  </button>
 
                   <Link
                     href={`/product/${item.slug}`}
                     className="inline-flex items-center gap-1 text-xs font-bold text-emerald-300 hover:text-white transition-colors"
                   >
-                    <span>View Pack</span>
+                    <span>Details</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
@@ -140,18 +155,16 @@ export default function DuloToonsBanner({ products, onSelectDuloFilter }: DuloTo
           <div className="mt-8 pt-6 border-t border-emerald-800/40 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-emerald-200">
             <div className="flex items-center gap-2">
               <span className="text-lg">✨</span>
-              <span>All DULO TOONS digital assets come with instant DRM-free download & lifetime print license.</span>
+              <span>All DULO TOONS digital assets include instant DRM-free download & unlimited family print license.</span>
             </div>
 
-            {onSelectDuloFilter && (
-              <button
-                onClick={onSelectDuloFilter}
-                className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black text-xs shadow-md transition-all flex items-center gap-2 shrink-0"
-              >
-                <span>Filter Catalog by DULO TOONS</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </button>
-            )}
+            <button
+              onClick={handleBrowseDulo}
+              className="px-5 py-2.5 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black text-xs shadow-md transition-all flex items-center gap-2 shrink-0 cursor-pointer"
+            >
+              <span>Browse All DULO TOONS Packs</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
           </div>
         </div>
       </div>

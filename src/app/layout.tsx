@@ -2,10 +2,13 @@ import type { Metadata } from 'next';
 import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { CartProvider } from '@/context/CartContext';
+import CartDrawer from '@/components/CartDrawer';
+import QuickViewModal from '@/components/QuickViewModal';
 
 export const metadata: Metadata = {
-  title: 'LittleNest Digital Store | eBooks, Audiobooks, DULO TOONS & Printables',
-  description: 'Downloadable digital goods for curious kids & happy parents: eBooks, bedtime audiobooks, DULO TOONS adventures, educational workbooks, and family planners.',
+  title: 'Tagline | Your Cozy Hub for Digital Crafts, Stories & Learning',
+  description: 'Discover downloadable eBooks, creative paper crafts, bedtime audiobooks, and fun learning activities for the whole family at Tagline.',
 };
 
 export default function RootLayout({
@@ -16,9 +19,13 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className="min-h-screen flex flex-col bg-[#FFFDF9] text-slate-800 antialiased">
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <CartProvider>
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          <CartDrawer />
+          <QuickViewModal />
+        </CartProvider>
       </body>
     </html>
   );

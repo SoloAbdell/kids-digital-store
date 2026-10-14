@@ -20,19 +20,19 @@ export async function sendDeliveryEmail({
   }
 
   return await resend.emails.send({
-    from: process.env.FROM_EMAIL || 'PlayfulKids <onboarding@resend.dev>',
+    from: process.env.FROM_EMAIL || 'Tagline <downloads@taglinestore.com>',
     to,
-    subject: `🎉 Your Printable Download is Ready: ${productTitle}`,
+    subject: `✨ Your Digital Download is Ready: ${productTitle}`,
     html: `
-      <div style="font-family: 'Helvetica Neue', Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #e2e8f0; border-radius: 16px; background-color: #ffffff;">
+      <div style="font-family: 'Helvetica Neue', Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #fef08a; border-radius: 16px; background-color: #ffffff;">
         <div style="text-align: center; margin-bottom: 24px;">
-          <h1 style="color: #ec4899; margin: 0; font-size: 26px;">🎈 Playful Kids Learning</h1>
-          <p style="color: #64748b; font-size: 14px; margin-top: 4px;">Printable fun that inspires young minds</p>
+          <h1 style="color: #d97706; margin: 0; font-size: 26px;">🌟 Tagline</h1>
+          <p style="color: #64748b; font-size: 14px; margin-top: 4px;">Your Cozy Hub for Digital Crafts, Stories & Learning</p>
         </div>
 
         <p style="font-size: 16px; color: #1e293b;">Hi <strong>${customerName}</strong>,</p>
         <p style="font-size: 16px; color: #475569; line-height: 1.6;">
-          Thank you for your order! Your digital printable sheets for <strong>${productTitle}</strong> are ready for instant download.
+          Thank you for your order! Your digital files for <strong>${productTitle}</strong> are ready for instant download.
         </p>
 
         <div style="text-align: center; margin: 32px 0;">

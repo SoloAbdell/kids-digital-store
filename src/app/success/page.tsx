@@ -53,10 +53,10 @@ function SuccessContent() {
         <div className="space-y-3 pt-2">
           <a
             href={`/api/download/${downloadToken}`}
-            className="w-full py-4 px-6 rounded-2xl bg-pink-500 hover:bg-pink-600 text-white font-extrabold text-base shadow-playful hover:shadow-playful-hover transition-all flex items-center justify-center gap-3"
+            className="w-full py-4 px-6 rounded-2xl bg-amber-400 hover:bg-amber-500 text-slate-950 font-black text-base shadow-playful hover:shadow-playful-hover transition-all flex items-center justify-center gap-3"
           >
             <Download className="w-5 h-5" />
-            <span>Download High-Resolution PDF Now</span>
+            <span>Download High-Resolution Files Now</span>
           </a>
 
           <div className="flex items-center justify-center gap-2 text-xs text-slate-500">
@@ -80,9 +80,9 @@ function SuccessContent() {
         <div className="pt-4 border-t border-slate-100">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-slate-900 transition-colors"
+            className="inline-flex items-center gap-2 text-xs font-bold text-slate-700 hover:text-amber-700 transition-colors"
           >
-            <span>Return to LittleNest Store</span>
+            <span>Return to Tagline Marketplace</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
