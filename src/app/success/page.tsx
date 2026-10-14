@@ -12,7 +12,8 @@ function SuccessContent() {
   const productId = searchParams.get('productId');
   const product = SAMPLE_PRODUCTS.find((p) => p.id === productId) || SAMPLE_PRODUCTS[0];
 
-  const downloadToken = sessionId ? `token_${sessionId.slice(0, 12)}` : 'sample-download-pack';
+  const tokenParam = searchParams.get('token');
+  const downloadToken = tokenParam || (sessionId ? `token_${sessionId.slice(0, 12)}` : 'sample-download-pack');
 
   return (
     <div className="py-16 max-w-3xl mx-auto px-4 sm:px-6">

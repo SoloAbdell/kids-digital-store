@@ -4,6 +4,7 @@ import { stripe } from '@/lib/stripe';
 import { supabaseAdmin } from '@/lib/supabase';
 import { sendDeliveryEmail } from '@/lib/email';
 import { SAMPLE_PRODUCTS } from '@/lib/products';
+import { createDownloadToken } from '@/lib/security';
 import crypto from 'crypto';
 
 export async function POST(req: Request) {
@@ -38,8 +39,14 @@ export async function POST(req: Request) {
     const product = SAMPLE_PRODUCTS.find((p) => p.id === productId);
     const productTitle = product ? product.title : 'Kids Activity Pack';
 
-    // 1. Generate unique, time-expiring download token
-    const token = crypto.randomBytes(24).toString('hex');
+    // 1. Generate unique, time-expiring HMAC signed download token
+    const token = createDownloadToken({
+      productId,
+      orderId: session.id,
+      email: customerEmail,
+      expiryHours: 48,
+      maxDownloads: 5,
+    });
     const expiresAt = new Date(Date.now() + 48 * 60 * 60 * 1000).toISOString(); // 48 hours
 
     try {

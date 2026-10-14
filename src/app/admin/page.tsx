@@ -1,33 +1,55 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { SAMPLE_PRODUCTS } from '@/lib/products';
 import { Product, Category, ProductFormat } from '@/lib/types';
-import { PlusCircle, Package, DollarSign, Users, ShieldAlert, ArrowRight, Check, Sparkles, Headphones, BookOpen } from 'lucide-react';
+import { PlusCircle, Package, DollarSign, Users, ShieldAlert, ArrowRight, Check, Sparkles, Headphones, BookOpen, Lock } from 'lucide-react';
 
 export default function AdminPage() {
   const [passcode, setPasscode] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isVerifying, setIsVerifying] = useState(true);
+  const [loginError, setLoginError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [products, setProducts] = useState<Product[]>(SAMPLE_PRODUCTS);
 
-  // Form states
-  const [title, setTitle] = useState('');
-  const [subtitle, setSubtitle] = useState('');
-  const [price, setPrice] = useState('');
-  const [pagesOrDuration, setPagesOrDuration] = useState('');
-  const [category, setCategory] = useState<Category>('ebooks');
-  const [format, setFormat] = useState<ProductFormat>('PDF Download');
-  const [isDuloToons, setIsDuloToons] = useState(false);
-  const [mockupUrl, setMockupUrl] = useState('');
-  const [description, setDescription] = useState('');
-  const [savedSuccess, setSavedSuccess] = useState(false);
+  useEffect(() => {
+    // Check if admin session cookie or header is active
+    fetch('/api/admin/verify')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.authenticated) {
+          setIsAuthenticated(true);
+        }
+      })
+      .catch(() => {})
+      .finally(() => setIsVerifying(false));
+  }, []);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (passcode === 'admin123' || passcode === (process.env.NEXT_PUBLIC_ADMIN_KEY || 'admin')) {
-      setIsAuthenticated(true);
-    } else {
-      alert('Invalid passcode. (Default demo pass: admin123)');
+    setIsSubmitting(true);
+    setLoginError(null);
+
+    try {
+      const res = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ passcode }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setLoginError(data.error || 'Authentication rejected by security policy.');
+      } else {
+        setIsAuthenticated(true);
+        setPasscode('');
+      }
+    } catch {
+      setLoginError('Network or security error. Please try again.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -70,6 +92,14 @@ export default function AdminPage() {
     setIsDuloToons(false);
   };
 
+  if (isVerifying) {
+    return (
+      <div className="py-32 text-center text-xs font-bold text-slate-400">
+        Verifying administrator security clearance...
+      </div>
+    );
+  }
+
   if (!isAuthenticated) {
     return (
       <div className="py-24 max-w-md mx-auto px-4">
@@ -78,7 +108,16 @@ export default function AdminPage() {
             🔒
           </div>
           <h1 className="font-extrabold text-xl text-slate-900">Admin Marketplace Portal</h1>
-          <p className="text-xs text-slate-500">Enter your store administrator passcode to manage digital downloads.</p>
+          <p className="text-xs text-slate-500">
+            Protected endpoint with brute-force lockout & rate limiting.
+          </p>
+
+          {loginError && (
+            <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-semibold text-left flex items-start gap-2">
+              <ShieldAlert className="w-4 h-4 shrink-0 mt-0.5 text-rose-600" />
+              <span>{loginError}</span>
+            </div>
+          )}
 
           <form onSubmit={handleLogin} className="space-y-3 pt-2">
             <input
@@ -86,13 +125,15 @@ export default function AdminPage() {
               placeholder="Enter passcode (demo: admin123)"
               value={passcode}
               onChange={(e) => setPasscode(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              disabled={isSubmitting}
+              className="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 disabled:bg-slate-50"
             />
             <button
               type="submit"
-              className="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl transition-all"
+              disabled={isSubmitting}
+              className="w-full py-3 bg-slate-900 hover:bg-slate-800 disabled:bg-slate-400 text-white font-bold text-xs rounded-xl transition-all"
             >
-              Access Admin Panel
+              {isSubmitting ? 'Verifying Credentials...' : 'Access Admin Panel'}
             </button>
           </form>
         </div>
@@ -111,7 +152,10 @@ export default function AdminPage() {
           <p className="text-xs text-slate-500">Manage eBooks, Audiobooks, 3D Crafts, DULO TOONS franchise, and Planners.</p>
         </div>
         <button
-          onClick={() => setIsAuthenticated(false)}
+          onClick={async () => {
+            await fetch('/api/admin/logout', { method: 'POST' }).catch(() => {});
+            setIsAuthenticated(false);
+          }}
           className="text-xs font-bold text-slate-400 hover:text-slate-800"
         >
           Logout

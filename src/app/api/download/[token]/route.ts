@@ -1,106 +1,155 @@
 import { NextResponse } from 'next/server';
+import fs from 'fs';
 import { supabaseAdmin } from '@/lib/supabase';
-import { SAMPLE_PRODUCTS } from '@/lib/products';
+import { verifyDownloadToken, getVaultFilePath } from '@/lib/security';
+import { checkRateLimit, getClientIp } from '@/lib/rate-limit';
+import { sanitizeFilename } from '@/lib/sanitization';
 
 export async function GET(
   req: Request,
   { params }: { params: { token: string } }
 ) {
-  const token = params.token;
+  // 1. Rate Limiting Protection (Prevent token brute-forcing / DDoS)
+  const clientIp = getClientIp(req);
+  const rateLimitResult = checkRateLimit(`download:${clientIp}`, 20, 600); // 20 requests per 10 minutes
 
-  // 1. Check if it's a demo or test token
-  if (token.startsWith('sample-') || token.startsWith('demo-')) {
-    // Generate a quick dummy printable PDF response
-    const samplePdfContent = `%PDF-1.4
-1 0 obj << /Type /Catalog /Pages 2 0 R >> endobj
-2 0 obj << /Type /Pages /Kids [3 0 R] /Count 1 >> endobj
-3 0 obj << /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >> endobj
-4 0 obj << /Length 85 >> stream
-BT
-/F1 24 Tf
-50 750 Td
-(LittleNest Printables - Activity Sheet Sample) Tj
-ET
-endstream
-endobj
-5 0 obj << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> endobj
-xref
-0 6
-0000000000 65535 f 
-0000000010 00000 n 
-0000000060 00000 n 
-0000000117 00000 n 
-0000000227 00000 n 
-0000000363 00000 n 
-trailer << /Root 1 0 R /Size 6 >>
-startxref
-434
-%%EOF`;
-
-    return new NextResponse(samplePdfContent, {
-      status: 200,
-      headers: {
-        'Content-Type': 'application/pdf',
-        'Content-Disposition': 'attachment; filename="littlenest-free-activity-pack.pdf"',
-      },
-    });
+  if (!rateLimitResult.allowed) {
+    return new NextResponse(
+      JSON.stringify({
+        error: 'Too many download attempts. Please slow down and try again later.',
+        retryAfter: rateLimitResult.retryAfterSeconds,
+      }),
+      {
+        status: 429,
+        headers: {
+          'Content-Type': 'application/json',
+          'Retry-After': String(rateLimitResult.retryAfterSeconds),
+          'X-RateLimit-Limit': String(rateLimitResult.limit),
+          'X-RateLimit-Remaining': '0',
+        },
+      }
+    );
   }
 
-  // 2. Lookup token in Supabase
-  try {
-    const { data: tokenRecord, error } = await supabaseAdmin
-      .from('download_tokens')
-      .select('*, products(*)')
-      .eq('token', token)
-      .single();
+  const rawToken = params.token;
+  if (!rawToken || typeof rawToken !== 'string') {
+    return NextResponse.json(
+      { error: 'Download token is required.' },
+      { status: 400 }
+    );
+  }
 
-    if (error || !tokenRecord) {
-      return NextResponse.json(
-        { error: 'Invalid or non-existent download token.' },
-        { status: 404 }
-      );
-    }
+  // 2. Cryptographic Token Verification
+  const verifyResult = verifyDownloadToken(rawToken);
 
-    // Check expiration
-    const now = new Date();
-    const expiry = new Date(tokenRecord.expires_at);
-    if (now > expiry) {
+  if (!verifyResult.valid) {
+    if (verifyResult.error === 'EXPIRED') {
       return NextResponse.json(
-        { error: 'This download link has expired (active for 48 hours). Please contact support for a fresh link.' },
+        {
+          error: 'This download link has expired (links remain active for 48 hours). Please contact support for an updated access link.',
+          code: 'TOKEN_EXPIRED',
+        },
         { status: 410 }
       );
     }
 
-    // Check download limit
-    if (tokenRecord.download_count >= tokenRecord.max_downloads) {
+    if (verifyResult.error === 'INVALID_SIGNATURE') {
       return NextResponse.json(
-        { error: `Download limit reached (${tokenRecord.max_downloads} downloads allowed). Please contact support if you need an extension.` },
+        {
+          error: 'Invalid download token signature. Access denied.',
+          code: 'UNAUTHORIZED_ACCESS',
+        },
         { status: 403 }
       );
     }
 
-    // Increment download count
-    await supabaseAdmin
-      .from('download_tokens')
-      .update({ download_count: tokenRecord.download_count + 1 })
-      .eq('id', tokenRecord.id);
+    // Check if token exists in Supabase DB before final rejection
+    try {
+      const { data: dbToken } = await supabaseAdmin
+        .from('download_tokens')
+        .select('*, products(*)')
+        .eq('token', rawToken)
+        .single();
 
-    // Create a time-limited signed download URL from Supabase Storage (valid for 60 seconds)
-    const filePath = tokenRecord.products?.storage_file_path || 'products/sample.pdf';
-    const { data: signedData, error: signError } = await supabaseAdmin.storage
-      .from('digital-products')
-      .createSignedUrl(filePath, 60);
+      if (dbToken) {
+        const now = new Date();
+        const expiry = new Date(dbToken.expires_at);
+        if (now > expiry) {
+          return NextResponse.json(
+            { error: 'This download link has expired in the database.' },
+            { status: 410 }
+          );
+        }
 
-    if (signedData?.signedUrl) {
-      return NextResponse.redirect(signedData.signedUrl);
+        if (dbToken.download_count >= dbToken.max_downloads) {
+          return NextResponse.json(
+            { error: `Download limit reached (${dbToken.max_downloads} allowed).` },
+            { status: 403 }
+          );
+        }
+
+        // Increment count
+        await supabaseAdmin
+          .from('download_tokens')
+          .update({ download_count: dbToken.download_count + 1 })
+          .eq('id', dbToken.id);
+
+        // Fetch signed storage URL from private bucket
+        const filePath = dbToken.products?.storage_file_path || 'sample.pdf';
+        const { data: signedData } = await supabaseAdmin.storage
+          .from('digital-products')
+          .createSignedUrl(filePath, 60);
+
+        if (signedData?.signedUrl) {
+          return NextResponse.redirect(signedData.signedUrl);
+        }
+      }
+    } catch {
+      // Continue to reject if not in DB
     }
 
-    // Fallback: Stream PDF directly
-    return NextResponse.json({
-      message: 'Token verified successfully. Stream ready.',
-      downloadsRemaining: tokenRecord.max_downloads - (tokenRecord.download_count + 1),
+    return NextResponse.json(
+      { error: 'Invalid or forged download token.', code: 'INVALID_TOKEN' },
+      { status: 403 }
+    );
+  }
+
+  // 3. Resolve Asset from Secure Server Vault (Never exposed via /public)
+  const productId = verifyResult.payload?.productId || 'freebie_starter';
+  const vaultAsset = getVaultFilePath(productId);
+
+  if (!vaultAsset) {
+    return NextResponse.json(
+      { error: 'Digital asset file could not be located in secure vault.' },
+      { status: 404 }
+    );
+  }
+
+  try {
+    const fileBuffer = fs.readFileSync(vaultAsset.filePath);
+    const safeFilename = sanitizeFilename(vaultAsset.fileName);
+
+    // 4. Stream response with anti-sniffing, anti-caching & strict download headers
+    return new NextResponse(fileBuffer, {
+      status: 200,
+      headers: {
+        'Content-Type': vaultAsset.mimeType,
+        'Content-Disposition': `attachment; filename="${safeFilename}"`,
+        'Content-Length': String(fileBuffer.length),
+        'Content-Security-Policy': "default-src 'none'",
+        'X-Content-Type-Options': 'nosniff',
+        'Cache-Control': 'private, no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0',
+        'X-RateLimit-Limit': String(rateLimitResult.limit),
+        'X-RateLimit-Remaining': String(rateLimitResult.remaining),
+      },
     });
   } catch (err: any) {
-    return NextResponse.json({ error: err.message || 'Error processing download' }, { status: 500 });
+    console.error('Error reading vault asset:', err);
+    return NextResponse.json(
+      { error: 'Failed to stream digital asset.' },
+      { status: 500 }
+    );
   }
 }
