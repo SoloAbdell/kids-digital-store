@@ -38,11 +38,24 @@ export default function LeadMagnet() {
   return (
     <section id="freebie" className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="relative overflow-hidden rounded-3xl shadow-2xl border border-amber-200/70 p-8 sm:p-12">
-        {/* Full 3D Pixar Background with kids and golden-white baby dragon (hero-banner.jpg) */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url('/hero-banner.jpg')` }}
-        >
+        {/* Full 3D Pixar Background with Seamless Video Loop Support */}
+        <div className="absolute inset-0 overflow-hidden">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            poster="/hero-banner.jpg"
+            className="absolute inset-0 w-full h-full object-cover"
+          >
+            <source src="/hero-banner.mp4" type="video/mp4" />
+            <source src="/hero-banner.webm" type="video/webm" />
+            <img
+              src="/hero-banner.jpg"
+              alt="3D Pixar Scene"
+              className="w-full h-full object-cover"
+            />
+          </video>
           {/* Gentle atmospheric layer preserving the 3D kids, dragon & cozy room */}
           <div className="absolute inset-0 bg-white/65 backdrop-blur-[1px]" />
           <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-emerald-50/75 to-amber-50/75" />

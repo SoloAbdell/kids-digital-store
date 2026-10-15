@@ -1,119 +1,129 @@
 'use client';
 
-import { Star, Download, Sparkles, Headphones, BookOpen, ShieldCheck } from 'lucide-react';
+import { Download, Headphones, BookOpen, ShieldCheck } from 'lucide-react';
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden pt-12 pb-16 min-h-[580px] lg:min-h-[640px] flex items-center justify-center">
-      {/* 1. Full 3D Pixar Background (L-Khalfiya) */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url('/hero-banner.jpg')` }}
+    <section className="relative w-full min-h-[600px] lg:min-h-[660px] flex flex-col items-center justify-center overflow-hidden pt-12 pb-16">
+      {/* 1. Video en Arrière-Plan (Autoplay, Loop, Muted, Playsinline) */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        poster="/hero-banner.jpg"
+        className="absolute top-0 left-0 w-full h-full object-cover z-1"
       >
-        {/* Soft atmospheric overlay keeping the 3D room, characters & landscape visible */}
-        <div className="absolute inset-0 bg-white/45 backdrop-blur-[1.5px]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/25 to-[#FDFCF8]" />
+        <source src="/hero-background.webm" type="video/webm" />
+        <source src="/hero-background.mp4" type="video/mp4" />
+        <source src="/hero-banner.webm" type="video/webm" />
+        <source src="/hero-banner.mp4" type="video/mp4" />
+        {/* Fallback image */}
+        <img
+          src="/hero-banner.jpg"
+          alt="3D Pixar Scene"
+          className="w-full h-full object-cover"
+        />
+      </video>
+
+      {/* 2. Overlay / Filtre doux pour garantir la lisibilité du texte */}
+      <div
+        className="hero-overlay absolute top-0 left-0 w-full h-full z-2 pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.2) 75%)',
+        }}
+      />
+
+      {/* Ambient Floating Golden Dust Particles in the Streaming Sunlight */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-2">
+        <div className="ambient-dust-particle w-2 h-2 top-1/4 left-1/3" style={{ animationDelay: '0s' }} />
+        <div className="ambient-dust-particle w-3 h-3 top-1/3 right-1/4" style={{ animationDelay: '2.5s' }} />
+        <div className="ambient-dust-particle w-2 h-2 top-1/2 left-1/2" style={{ animationDelay: '4s' }} />
+        <div className="ambient-dust-particle w-3.5 h-3.5 top-1/5 right-1/3" style={{ animationDelay: '1.2s' }} />
+        <div className="ambient-dust-particle w-2 h-2 top-2/3 left-1/4" style={{ animationDelay: '3.3s' }} />
+        <div className="ambient-dust-particle w-2.5 h-2.5 top-1/2 right-1/5" style={{ animationDelay: '5s' }} />
       </div>
 
-      {/* 2. Original Page Content (Floating directly on the background without any enclosing card) */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        
-        {/* Social Proof Pill */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-2xl bg-white/95 border border-emerald-100 shadow-xs text-xs font-semibold text-slate-700 mb-6 backdrop-blur-sm">
-          <div className="flex text-amber-400">
-            {[...Array(5)].map((_, i) => (
-              <Star key={i} className="w-3.5 h-3.5 fill-current" />
-            ))}
-          </div>
-          <span className="text-slate-800">
-            Loved by 6,500+ Parents, Educators & Curious Kids Worldwide
-          </span>
+      {/* 3. Le Contenu Texte & Boutons (Au-dessus de la vidéo) */}
+      <div className="hero-content relative z-3 text-center max-w-[900px] px-5 py-10 mx-auto">
+        {/* Étoiles / Badge avis */}
+        <div className="inline-block bg-white/90 backdrop-blur-sm px-4 py-1.5 rounded-full font-semibold text-xs sm:text-sm text-slate-800 mb-5 shadow-xs border border-white/60">
+          ⭐⭐⭐⭐⭐ Loved by 6,500+ Parents, Educators & Curious Kids Worldwide
         </div>
 
-        {/* Headline: Exact copy and gradient layout as in screenshot */}
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 tracking-tight leading-[1.15] max-w-4xl mx-auto mb-6">
-          Welcome to Tagline: <br />
-          <span className="bg-gradient-to-r from-emerald-600 via-purple-600 to-amber-500 bg-clip-text text-transparent">
-            Your Cozy Hub for Digital
-          </span> <br />
-          <span className="bg-gradient-to-r from-purple-600 via-amber-500 to-amber-600 bg-clip-text text-transparent">
-            Crafts & Stories 🧩
-          </span>
+        {/* Titre Principal */}
+        <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-[#1e1b4b] leading-[1.2] mb-4 tracking-tight">
+          Welcome to Tagline:<br />
+          <span style={{ color: '#0d9488' }}>Your Cozy Hub</span> for{' '}
+          <span style={{ color: '#6366f1' }}>Digital</span>{' '}
+          <span style={{ color: '#ea580c' }}>Crafts & Stories</span>
         </h1>
 
-        {/* Subtitle */}
-        <p className="text-lg sm:text-xl text-slate-700 max-w-2xl mx-auto mb-10 leading-relaxed font-normal">
+        {/* Description */}
+        <p className="text-base sm:text-lg text-[#334155] max-w-[700px] mx-auto mb-8 font-medium leading-relaxed">
           Discover downloadable eBooks, creative paper crafts, bedtime audiobooks, and fun learning activities for the whole family.
         </p>
 
-        {/* Core Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14">
-          {/* Primary CTA: Dragon Green */}
+        {/* Boutons d'Action (CTAs) */}
+        <div className="flex gap-4 justify-center flex-wrap mb-12">
           <a
             href="#catalog"
-            className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-black text-base shadow-playful hover:shadow-playful-hover hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 group cursor-pointer"
+            className="text-white px-7 py-3.5 rounded-xl font-bold text-sm sm:text-base inline-block shadow-playful hover:shadow-playful-hover hover:-translate-y-0.5 transition-all cursor-pointer"
+            style={{ background: '#0d9488' }}
           >
-            <span>Explore All Products</span>
-            <span className="group-hover:translate-x-1 transition-transform">→</span>
+            Explore All Products →
           </a>
-
-          {/* Special / Freebie CTA: Warm Gold */}
           <a
             href="#freebie"
-            className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-amber-400 hover:bg-amber-500 text-slate-950 font-black text-base shadow-playful-gold hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 cursor-pointer border border-amber-300"
+            className="text-white px-7 py-3.5 rounded-xl font-bold text-sm sm:text-base inline-block shadow-playful-gold hover:-translate-y-0.5 transition-all cursor-pointer"
+            style={{ background: '#f59e0b' }}
           >
-            <Sparkles className="w-5 h-5 text-amber-900" />
-            <span>Get Free Activity Pack</span>
+            ✨ Get Free Activity Pack
           </a>
         </div>
 
-        {/* Core Logo-Color Value Prop Badges */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto text-left">
-          {/* Green Badge */}
-          <div className="bg-white/95 backdrop-blur-sm p-4 rounded-2xl border border-emerald-100 shadow-xs flex items-start gap-3">
-            <div className="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-800 shrink-0">
-              <Download className="w-5 h-5" />
+        {/* Core Value Proposition Badges */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl mx-auto text-left pt-2">
+          <div className="bg-white/90 backdrop-blur-sm p-3.5 rounded-2xl border border-white/80 shadow-xs flex items-start gap-2.5">
+            <div className="w-9 h-9 rounded-xl bg-teal-100 flex items-center justify-center text-teal-800 shrink-0">
+              <Download className="w-4 h-4" />
             </div>
             <div>
-              <h3 className="font-extrabold text-sm text-slate-900">Instant Download</h3>
-              <p className="text-xs text-slate-500 mt-0.5">Files ready in 2 seconds right after checkout.</p>
+              <h3 className="font-extrabold text-xs text-slate-900">Instant Download</h3>
+              <p className="text-[11px] text-slate-500">Ready in 2 seconds.</p>
             </div>
           </div>
 
-          {/* Purple / Violet Badge */}
-          <div className="bg-white/95 backdrop-blur-sm p-4 rounded-2xl border border-purple-100 shadow-xs flex items-start gap-3">
-            <div className="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center text-purple-800 shrink-0">
-              <Headphones className="w-5 h-5" />
+          <div className="bg-white/90 backdrop-blur-sm p-3.5 rounded-2xl border border-white/80 shadow-xs flex items-start gap-2.5">
+            <div className="w-9 h-9 rounded-xl bg-indigo-100 flex items-center justify-center text-indigo-800 shrink-0">
+              <Headphones className="w-4 h-4" />
             </div>
             <div>
-              <h3 className="font-extrabold text-sm text-slate-900">Screen-Free Audio</h3>
-              <p className="text-xs text-slate-500 mt-0.5">Soothing bedtime stories for peaceful sleep.</p>
+              <h3 className="font-extrabold text-xs text-slate-900">Screen-Free Audio</h3>
+              <p className="text-[11px] text-slate-500">Bedtime sleep tales.</p>
             </div>
           </div>
 
-          {/* Gold / Amber Badge */}
-          <div className="bg-white/95 backdrop-blur-sm p-4 rounded-2xl border border-amber-100 shadow-xs flex items-start gap-3">
-            <div className="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center text-amber-800 shrink-0">
-              <BookOpen className="w-5 h-5" />
+          <div className="bg-white/90 backdrop-blur-sm p-3.5 rounded-2xl border border-white/80 shadow-xs flex items-start gap-2.5">
+            <div className="w-9 h-9 rounded-xl bg-amber-100 flex items-center justify-center text-amber-800 shrink-0">
+              <BookOpen className="w-4 h-4" />
             </div>
             <div>
-              <h3 className="font-extrabold text-sm text-slate-900">Printable Crafts</h3>
-              <p className="text-xs text-slate-500 mt-0.5">3D models, DIY cutouts & coloring books.</p>
+              <h3 className="font-extrabold text-xs text-slate-900">Printable Crafts</h3>
+              <p className="text-[11px] text-slate-500">3D models & coloring.</p>
             </div>
           </div>
 
-          {/* Green Re-Use Badge */}
-          <div className="bg-white/95 backdrop-blur-sm p-4 rounded-2xl border border-emerald-100 shadow-xs flex items-start gap-3">
-            <div className="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-800 shrink-0">
-              <ShieldCheck className="w-5 h-5" />
+          <div className="bg-white/90 backdrop-blur-sm p-3.5 rounded-2xl border border-white/80 shadow-xs flex items-start gap-2.5">
+            <div className="w-9 h-9 rounded-xl bg-teal-100 flex items-center justify-center text-teal-800 shrink-0">
+              <ShieldCheck className="w-4 h-4" />
             </div>
             <div>
-              <h3 className="font-extrabold text-sm text-slate-900">Lifetime Re-Use</h3>
-              <p className="text-xs text-slate-500 mt-0.5">Print unlimited copies for siblings & school.</p>
+              <h3 className="font-extrabold text-xs text-slate-900">Lifetime Re-Use</h3>
+              <p className="text-[11px] text-slate-500">Unlimited prints.</p>
             </div>
           </div>
         </div>
-
       </div>
     </section>
   );
