@@ -45,6 +45,10 @@ export interface CartItem {
   quantity: number;
 }
 
+export type PaymentProvider = 'stripe' | 'paypal' | 'crypto';
+
+export type PaymentStatus = 'pending' | 'completed' | 'failed' | 'refunded';
+
 export interface Order {
   id: string;
   customer_name: string;
@@ -52,8 +56,28 @@ export interface Order {
   product_id: string;
   amount_paid: number;
   currency: string;
-  stripe_session_id?: string;
-  status: 'pending' | 'completed' | 'failed';
+  provider: PaymentProvider;
+  gateway_transaction_id: string;
+  status: PaymentStatus;
+  download_token?: string;
+  fulfilled_at?: string;
+  created_at: string;
+}
+
+export interface Transaction {
+  id: string;
+  order_id: string;
+  provider: PaymentProvider;
+  gateway_transaction_id: string;
+  product_id: string;
+  amount: number;
+  currency: string;
+  customer_email: string;
+  customer_name: string;
+  status: PaymentStatus;
+  download_token?: string;
+  idempotency_key: string;
+  fulfilled_at?: string;
   created_at: string;
 }
 
@@ -68,3 +92,4 @@ export interface DownloadToken {
   expires_at: string;
   created_at: string;
 }
+

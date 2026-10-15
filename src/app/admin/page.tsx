@@ -12,6 +12,16 @@ export default function AdminPage() {
   const [loginError, setLoginError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [products, setProducts] = useState<Product[]>(SAMPLE_PRODUCTS);
+  const [title, setTitle] = useState('');
+  const [subtitle, setSubtitle] = useState('');
+  const [price, setPrice] = useState('');
+  const [pagesOrDuration, setPagesOrDuration] = useState('');
+  const [category, setCategory] = useState<Category>('ebooks');
+  const [format, setFormat] = useState<ProductFormat>('PDF Download');
+  const [isDuloToons, setIsDuloToons] = useState(false);
+  const [mockupUrl, setMockupUrl] = useState('');
+  const [description, setDescription] = useState('');
+  const [savedSuccess, setSavedSuccess] = useState(false);
 
   useEffect(() => {
     // Check if admin session cookie or header is active
@@ -69,7 +79,7 @@ export default function AdminPage() {
       pages_count: 20,
       thumbnail_url: mockupUrl || 'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=800&q=80',
       preview_images: [mockupUrl || 'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=800&q=80'],
-      storage_file_path: `products/${title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}.${format === 'MP3 Audio' ? 'zip' : 'pdf'}`,
+      storage_file_path: `products/${title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}.${format === 'Audio MP3' ? 'zip' : 'pdf'}`,
       is_featured: false,
       is_dulo_toons: isDuloToons,
       is_freebie: parseFloat(price) === 0,

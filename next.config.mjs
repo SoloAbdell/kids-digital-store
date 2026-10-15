@@ -8,6 +8,7 @@ const ContentSecurityPolicy = `
   media-src 'self' blob: data: https: https://actions.google.com;
   font-src 'self' data: https:;
   connect-src 'self' https:;
+  frame-src 'self' https://js.stripe.com https://hooks.stripe.com https://www.paypal.com https://*.paypal.com https://commerce.coinbase.com;
   frame-ancestors 'none';
 `.replace(/\s{2,}/g, ' ').trim();
 

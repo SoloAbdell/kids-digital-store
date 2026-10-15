@@ -1,12 +1,25 @@
 import { NextResponse } from 'next/server';
-import { stripe } from '@/lib/stripe';
 import { SAMPLE_PRODUCTS } from '@/lib/products';
 import { checkRateLimit, getClientIp } from '@/lib/rate-limit';
 import { sanitizeString, sanitizeEmail, validateCsrfOrigin } from '@/lib/sanitization';
-import { createDownloadToken } from '@/lib/security';
+import { handleSecureError, enforceHttps } from '@/lib/error-masking';
+import {
+  createStripeCheckoutSession,
+  createPayPalOrder,
+  createCryptoCharge,
+} from '@/lib/payment-gateways';
+import { PaymentProvider } from '@/lib/types';
 
 export async function POST(req: Request) {
-  // 1. CSRF Origin Validation
+  // 1. Transport Security Check
+  if (!enforceHttps(req)) {
+    return NextResponse.json(
+      { error: 'Insecure transport rejected. HTTPS is strictly enforced.' },
+      { status: 403 }
+    );
+  }
+
+  // 2. CSRF Origin Validation
   if (!validateCsrfOrigin(req)) {
     return NextResponse.json(
       { error: 'Cross-origin request rejected.' },
@@ -14,14 +27,14 @@ export async function POST(req: Request) {
     );
   }
 
-  // 2. DDoS & Carding Prevention (Rate limit checkout sessions per IP)
+  // 3. Rate Limiting Protection (Prevent card testing / spam)
   const clientIp = getClientIp(req);
-  const rateLimitResult = checkRateLimit(`checkout:${clientIp}`, 15, 900); // 15 requests per 15 minutes
+  const rateLimitResult = checkRateLimit(`checkout:${clientIp}`, 15, 900); // 15 checkouts per 15 min
 
   if (!rateLimitResult.allowed) {
     return new NextResponse(
       JSON.stringify({
-        error: 'Too many checkout requests initiated. Please wait a few moments before trying again.',
+        error: 'Too many checkout requests. Please wait a few moments before trying again.',
         retryAfter: rateLimitResult.retryAfterSeconds,
       }),
       {
@@ -37,13 +50,21 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
 
-    // 3. Input Sanitization & Validation
+    // 4. Input Sanitization & Strict Validation
     const productId = sanitizeString(body.productId, 100);
     const customerEmail = sanitizeEmail(body.customerEmail);
     const customerName = sanitizeString(body.customerName || '', 120);
+    const rawProvider = sanitizeString(body.provider || 'stripe', 20).toLowerCase();
+
+    const provider: PaymentProvider =
+      rawProvider === 'paypal' ? 'paypal' : rawProvider === 'crypto' ? 'crypto' : 'stripe';
 
     if (!productId) {
       return NextResponse.json({ error: 'Valid product ID is required.' }, { status: 400 });
+    }
+
+    if (!customerEmail) {
+      return NextResponse.json({ error: 'Valid email address is required for digital delivery.' }, { status: 400 });
     }
 
     const product = SAMPLE_PRODUCTS.find((p) => p.id === productId);
@@ -51,61 +72,37 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Product not found in marketplace catalog.' }, { status: 404 });
     }
 
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
-    const orderId = `ord_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
-
-    // Generate cryptographically signed token for asset delivery
-    const signedDownloadToken = createDownloadToken({
-      productId: product.id,
-      orderId,
-      email: customerEmail || 'guest@tagline.store',
-      expiryHours: 48,
-      maxDownloads: 5,
-    });
-
-    // 4. Handle Demo Mode if Stripe is not configured
-    if (!process.env.STRIPE_SECRET_KEY || process.env.STRIPE_SECRET_KEY.includes('placeholder')) {
-      return NextResponse.json({
-        url: `${appUrl}/success?session_id=${orderId}&productId=${product.id}&token=${encodeURIComponent(signedDownloadToken)}&name=${encodeURIComponent(customerName)}`,
+    // 5. Initiate Hosted Gateway Session (PCI-DSS: Zero sensitive card/financial details touch our server)
+    let sessionResult;
+    if (provider === 'paypal') {
+      sessionResult = await createPayPalOrder({
+        product,
+        customerEmail,
+        customerName: customerName || 'Valued Parent',
+      });
+    } else if (provider === 'crypto') {
+      sessionResult = await createCryptoCharge({
+        product,
+        customerEmail,
+        customerName: customerName || 'Valued Parent',
+      });
+    } else {
+      // Default: Stripe Credit/Debit Cards
+      sessionResult = await createStripeCheckoutSession({
+        product,
+        customerEmail,
+        customerName: customerName || 'Valued Parent',
       });
     }
 
-    // 5. Create Secure Stripe Checkout Session
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
-      mode: 'payment',
-      customer_email: customerEmail || undefined,
-      line_items: [
-        {
-          price_data: {
-            currency: product.currency.toLowerCase(),
-            product_data: {
-              name: product.title,
-              description: `${product.pages_count} Pages • Printable Kids Activity PDF`,
-              images: [product.thumbnail_url],
-            },
-            unit_amount: Math.round(product.price * 100),
-          },
-          quantity: 1,
-        },
-      ],
-      metadata: {
-        productId: product.id,
-        orderId,
-        customerName: customerName || '',
-        customerEmail: customerEmail || '',
-        downloadToken: signedDownloadToken,
-      },
-      success_url: `${appUrl}/success?session_id={CHECKOUT_SESSION_ID}&productId=${product.id}&token=${encodeURIComponent(signedDownloadToken)}`,
-      cancel_url: `${appUrl}/product/${product.slug}?canceled=true`,
+    // Return hosted checkout URL
+    return NextResponse.json({
+      url: sessionResult.url,
+      orderId: sessionResult.orderId,
+      provider: sessionResult.provider,
+      gatewayTransactionId: sessionResult.gatewayTransactionId,
     });
-
-    return NextResponse.json({ url: session.url });
-  } catch (error: any) {
-    console.error('Checkout error:', error);
-    return NextResponse.json(
-      { error: 'Checkout session could not be established.' },
-      { status: 500 }
-    );
+  } catch (error: unknown) {
+    return handleSecureError('CheckoutRoute', error);
   }
 }

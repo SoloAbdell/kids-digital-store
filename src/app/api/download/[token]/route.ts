@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import fs from 'fs';
 import { supabaseAdmin } from '@/lib/supabase';
 import { verifyDownloadToken, getVaultFilePath } from '@/lib/security';
+import { consumeDownloadTokenAttempt } from '@/lib/transactions';
 import { checkRateLimit, getClientIp } from '@/lib/rate-limit';
 import { sanitizeFilename } from '@/lib/sanitization';
 
@@ -114,7 +115,30 @@ export async function GET(
     );
   }
 
-  // 3. Resolve Asset from Secure Server Vault (Never exposed via /public)
+  // 3. Strict Download Attempt & Expiry Check (Max 3 attempts, 48 hours)
+  const attemptResult = consumeDownloadTokenAttempt(rawToken);
+  if (!attemptResult.allowed) {
+    if (attemptResult.reason === 'LIMIT_REACHED') {
+      return NextResponse.json(
+        {
+          error: 'Maximum download limit reached (max 3 download attempts allowed). Please contact support for an updated access link.',
+          code: 'DOWNLOAD_LIMIT_REACHED',
+        },
+        { status: 403 }
+      );
+    }
+    if (attemptResult.reason === 'EXPIRED') {
+      return NextResponse.json(
+        {
+          error: 'This download link has expired (links remain active for 24–48 hours). Please contact support for an updated access link.',
+          code: 'TOKEN_EXPIRED',
+        },
+        { status: 410 }
+      );
+    }
+  }
+
+  // 4. Resolve Asset from Secure Server Vault (Never exposed via /public)
   const productId = verifyResult.payload?.productId || 'freebie_starter';
   const vaultAsset = getVaultFilePath(productId);
 

@@ -45,6 +45,9 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
 
   const isFree = product.price === 0 || product.is_freebie;
 
+  const [paymentProvider, setPaymentProvider] = useState<'stripe' | 'paypal' | 'crypto'>('stripe');
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
   const toggleAudio = () => {
     const url = product.audio_sample_url || 'https://actions.google.com/sounds/v1/ambiences/forest_day.ogg';
     if (!audioElement) {
@@ -67,6 +70,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
   const handleCheckout = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsCheckingOut(true);
+    setErrorMessage(null);
 
     if (isFree) {
       window.location.href = `/api/download/sample-${product.slug}`;
@@ -81,17 +85,25 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
           productId: product.id,
           customerEmail: email,
           customerName: name,
+          provider: paymentProvider,
         }),
       });
 
       const data = await res.json();
+      if (!res.ok) {
+        setErrorMessage(data.error || 'Payment could not be processed. Please check your payment details.');
+        setIsCheckingOut(false);
+        return;
+      }
+
       if (data.url) {
         window.location.href = data.url;
       } else {
-        window.location.href = `/success?session_id=demo_session_${product.id}&productId=${product.id}`;
+        window.location.href = `/success?session_id=${data.gatewayTransactionId || data.orderId}&productId=${product.id}&provider=${paymentProvider}`;
       }
-    } catch (err) {
-      window.location.href = `/success?session_id=demo_session_${product.id}&productId=${product.id}`;
+    } catch {
+      setErrorMessage('Payment could not be processed. Please check your connection and try again.');
+      setIsCheckingOut(false);
     }
   };
 
@@ -289,6 +301,12 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
               </span>
             </div>
 
+            {errorMessage && (
+              <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-semibold">
+                ⚠️ {errorMessage}
+              </div>
+            )}
+
             <form onSubmit={handleCheckout} className="space-y-3">
               <div>
                 <label className="block text-[11px] font-bold text-slate-600 mb-1">
@@ -318,32 +336,99 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                 />
               </div>
 
+              {/* Payment Method Selector (PCI-DSS: Zero sensitive card data on our server) */}
+              {!isFree && (
+                <div className="pt-1">
+                  <label className="block text-[11px] font-bold text-slate-600 mb-1.5">
+                    Select Payment Gateway
+                  </label>
+                  <div className="grid grid-cols-3 gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setPaymentProvider('stripe')}
+                      className={`p-2.5 rounded-xl border text-xs font-bold flex flex-col items-center justify-center gap-1 transition-all cursor-pointer ${
+                        paymentProvider === 'stripe'
+                          ? 'border-emerald-600 bg-emerald-50/70 text-emerald-900 ring-2 ring-emerald-500/30'
+                          : 'border-slate-200 bg-slate-50/50 text-slate-600 hover:bg-slate-100'
+                      }`}
+                    >
+                      <span className="text-base">💳</span>
+                      <span className="text-[11px] leading-tight">Card / Stripe</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setPaymentProvider('paypal')}
+                      className={`p-2.5 rounded-xl border text-xs font-bold flex flex-col items-center justify-center gap-1 transition-all cursor-pointer ${
+                        paymentProvider === 'paypal'
+                          ? 'border-blue-600 bg-blue-50/70 text-blue-900 ring-2 ring-blue-500/30'
+                          : 'border-slate-200 bg-slate-50/50 text-slate-600 hover:bg-slate-100'
+                      }`}
+                    >
+                      <span className="text-base">🅿️</span>
+                      <span className="text-[11px] leading-tight">PayPal</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setPaymentProvider('crypto')}
+                      className={`p-2.5 rounded-xl border text-xs font-bold flex flex-col items-center justify-center gap-1 transition-all cursor-pointer ${
+                        paymentProvider === 'crypto'
+                          ? 'border-amber-600 bg-amber-50/70 text-amber-900 ring-2 ring-amber-500/30'
+                          : 'border-slate-200 bg-slate-50/50 text-slate-600 hover:bg-slate-100'
+                      }`}
+                    >
+                      <span className="text-base">⚡</span>
+                      <span className="text-[11px] leading-tight">Crypto (BTC)</span>
+                    </button>
+                  </div>
+                </div>
+              )}
+
               <button
                 type="submit"
                 disabled={isCheckingOut}
-                className={`w-full py-3.5 px-4 rounded-2xl font-extrabold text-sm shadow-playful hover:shadow-playful-hover transition-all flex items-center justify-center gap-2 cursor-pointer mt-2 ${
+                className={`w-full py-3.5 px-4 rounded-2xl font-extrabold text-sm shadow-playful hover:shadow-playful-hover transition-all flex items-center justify-center gap-2 cursor-pointer mt-3 ${
                   isFree
                     ? 'bg-emerald-600 hover:bg-emerald-700 text-white'
-                    : 'bg-amber-400 hover:bg-amber-500 text-slate-950 font-black shadow-playful-gold'
+                    : paymentProvider === 'paypal'
+                    ? 'bg-blue-600 hover:bg-blue-700 text-white font-black shadow-md'
+                    : paymentProvider === 'crypto'
+                    ? 'bg-amber-500 hover:bg-amber-600 text-slate-950 font-black shadow-playful-gold'
+                    : 'bg-emerald-600 hover:bg-emerald-700 text-white font-black shadow-playful'
                 }`}
               >
                 {isCheckingOut ? (
                   <>
                     <Loader2 className="w-4 h-4 animate-spin" />
-                    <span>Preparing Your Download...</span>
+                    <span>Connecting Secure Gateway...</span>
                   </>
                 ) : (
                   <>
-                    <Download className="w-4 h-4 text-emerald-800" />
-                    <span>{isFree ? 'Download Free Activity Pack' : `Direct Checkout (${product.price.toFixed(2)})`}</span>
+                    <Download className="w-4 h-4" />
+                    <span>
+                      {isFree
+                        ? 'Download Free Activity Pack'
+                        : `Pay with ${
+                            paymentProvider === 'paypal'
+                              ? 'PayPal'
+                              : paymentProvider === 'crypto'
+                              ? 'Crypto'
+                              : 'Stripe'
+                          } ($${product.price.toFixed(2)})`}
+                    </span>
                   </>
                 )}
               </button>
 
-              <div className="flex items-center justify-center gap-3 text-[10px] text-slate-400 pt-2">
-                <span>🔒 Powered by Stripe</span>
-                <span>•</span>
-                <span>⚡ Instant Download Guarantee</span>
+              <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200/70 text-[10px] text-slate-500 space-y-1">
+                <div className="flex items-center justify-center gap-1 font-bold text-slate-700">
+                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                  <span>Strict PCI-DSS Level 1 Compliance</span>
+                </div>
+                <p className="text-center text-[9px] text-slate-400">
+                  Zero sensitive card or banking data is stored on our servers. Transactions are tokenized directly via official hosted gateways.
+                </p>
               </div>
             </form>
           </div>

@@ -38,7 +38,7 @@ export function createDownloadToken(params: {
     orderId: params.orderId,
     email: params.email || 'customer@tagline.store',
     exp,
-    maxDownloads: params.maxDownloads ?? 5,
+    maxDownloads: params.maxDownloads ?? 3,
     issuedAt: Date.now(),
   };
 
