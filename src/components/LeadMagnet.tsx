@@ -37,41 +37,46 @@ export default function LeadMagnet() {
 
   return (
     <section id="freebie" className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      {/* Brand Logo 3-Color Gradient Banner (Green -> Purple -> Gold) */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-emerald-700 via-purple-700 to-amber-500 p-8 sm:p-12 text-white shadow-xl">
-        {/* Background decorative circles */}
-        <div className="absolute -top-12 -right-12 w-64 h-64 bg-white/10 rounded-full blur-2xl pointer-events-none" />
-        <div className="absolute -bottom-12 -left-12 w-64 h-64 bg-white/10 rounded-full blur-2xl pointer-events-none" />
+      <div className="relative overflow-hidden rounded-3xl shadow-2xl border border-amber-200/70 p-8 sm:p-12">
+        {/* Full 3D Pixar Background with kids and golden-white baby dragon (hero-banner.jpg) */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url('/hero-banner.jpg')` }}
+        >
+          {/* Gentle atmospheric layer preserving the 3D kids, dragon & cozy room */}
+          <div className="absolute inset-0 bg-white/65 backdrop-blur-[1px]" />
+          <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-emerald-50/75 to-amber-50/75" />
+        </div>
 
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-7 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-2xl bg-white/20 backdrop-blur-sm text-xs font-black tracking-wide uppercase">
-              <Gift className="w-4 h-4 text-amber-300" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-2xl bg-emerald-100/90 border border-emerald-300 text-xs font-black tracking-wide uppercase text-emerald-900 shadow-xs">
+              <Gift className="w-4 h-4 text-emerald-700" />
               <span>Tagline Freebies Download Hub</span>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl font-black leading-tight">
+            <h2 className="text-3xl sm:text-4xl font-black text-slate-900 leading-tight">
               Get Your Free 5-Page Activity & Story Starter Pack!
             </h2>
 
-            <p className="text-white/95 text-sm sm:text-base leading-relaxed">
+            <p className="text-slate-700 text-sm sm:text-base leading-relaxed font-medium">
               Test out our digital printables and sample story sheets! Includes 2 high-res coloring pages, 1 DULO TOONS dragon paper craft, and 2 foundational math tracing sheets.
             </p>
 
-            <div className="flex flex-wrap gap-4 text-xs font-semibold pt-2 text-white/95">
+            <div className="flex flex-wrap gap-4 text-xs font-bold pt-2 text-slate-800">
               <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-amber-300" /> 100% Free • No card needed
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" /> 100% Free • No card needed
               </div>
               <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-amber-300" /> Instant PDF Download link
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" /> Instant PDF Download link
               </div>
               <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-amber-300" /> Print as often as you want
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" /> Print as often as you want
               </div>
             </div>
           </div>
 
-          <div className="lg:col-span-5 bg-white text-slate-900 p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-2xl">
+          <div className="lg:col-span-5 bg-white/95 backdrop-blur-md text-slate-900 p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-xl border border-slate-200/80">
             {status === 'success' ? (
               <div className="text-center py-4 space-y-3">
                 <div className="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mx-auto text-2xl">
@@ -83,7 +88,7 @@ export default function LeadMagnet() {
                 </p>
                 <a
                   href={downloadLink}
-                  className="mt-4 inline-flex items-center justify-center gap-2 w-full py-3.5 px-4 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs shadow-playful transition-all"
+                  className="mt-4 inline-flex items-center justify-center gap-2 w-full py-3.5 px-4 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs shadow-playful transition-all cursor-pointer"
                 >
                   <Download className="w-4 h-4 text-amber-300" />
                   <span>Download Free PDF Now</span>
@@ -101,7 +106,7 @@ export default function LeadMagnet() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="parent_or_educator@gmail.com"
-                    className="w-full px-4 py-3 rounded-2xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-4 py-3 rounded-2xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white"
                   />
                 </div>
 
