@@ -1,10 +1,10 @@
-export default function BrandLogo({ className = "w-10 h-10" }: { className?: string }) {
+export default function BrandLogo({ className = "w-11 h-11" }: { className?: string }) {
   return (
-    <div className={`relative shrink-0 ${className}`}>
+    <div className={`relative shrink-0 overflow-hidden rounded-2xl shadow-md border border-slate-800/20 bg-slate-950 ${className}`}>
       <img
-        src="/logo.svg"
+        src="/logo.jpg"
         alt="Tagline Logo"
-        className="w-full h-full object-contain rounded-2xl shadow-sm hover:scale-105 transition-transform"
+        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
       />
     </div>
   );

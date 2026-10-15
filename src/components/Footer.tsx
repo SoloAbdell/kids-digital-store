@@ -9,7 +9,7 @@ export default function Footer() {
           {/* Brand Info */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <BrandLogo className="w-10 h-10" />
+              <BrandLogo className="w-11 h-11" />
               <span className="text-2xl font-black text-white tracking-tight">Tagline</span>
             </div>
             <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
