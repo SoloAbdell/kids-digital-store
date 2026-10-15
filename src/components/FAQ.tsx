@@ -29,13 +29,13 @@ export default function FAQ() {
   ];
 
   return (
-    <section id="faq" className="glass-section max-w-4xl mx-auto px-6 sm:px-10 py-12 my-12">
+    <section id="faq" className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 my-6">
       <div className="text-center mb-10">
-        <span className="text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-100 border border-emerald-200 px-3.5 py-1 rounded-full">
+        <span className="text-xs font-black uppercase tracking-wider text-emerald-900 bg-white/85 backdrop-blur-md border border-emerald-300 px-3.5 py-1.5 rounded-full shadow-xs">
           Got Questions?
         </span>
-        <h2 className="text-3xl font-black text-slate-900 mt-3">Frequently Asked Questions</h2>
-        <p className="text-xs sm:text-sm text-slate-500 mt-1">Everything you need to know about formats, audio playback, and printing.</p>
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 mt-3 text-contrast-title">Frequently Asked Questions</h2>
+        <p className="text-xs sm:text-sm text-slate-700 font-semibold mt-1">Everything you need to know about formats, audio playback, and printing.</p>
       </div>
 
       <div className="space-y-4">

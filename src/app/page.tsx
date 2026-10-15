@@ -23,15 +23,15 @@ export default function HomePage() {
       <ProductCatalog products={SAMPLE_PRODUCTS} />
 
       {/* 5. About Tagline: Cozy Digital Crafts, Stories & Learning */}
-      <section id="why-us" className="glass-section max-w-7xl mx-auto px-6 sm:px-10 py-12 my-12">
+      <section id="why-us" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 my-6">
         <div className="text-center max-w-2xl mx-auto mb-10">
-          <span className="text-xs font-black uppercase tracking-wider text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-200">
+          <span className="text-xs font-black uppercase tracking-wider text-emerald-900 bg-white/85 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-emerald-300 shadow-xs">
             About Tagline
           </span>
-          <h2 className="text-3xl font-black text-slate-900 mt-3">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 mt-3 text-contrast-title">
             Your Cozy Hub for Digital Crafts, Stories & Learning
           </h2>
-          <p className="text-sm text-slate-600 mt-2">
+          <p className="text-sm sm:text-base text-slate-700 font-semibold mt-2">
             We design wholesome digital goods that inspire hands-on creativity and peaceful bedtime routines away from addictive screen feeds.
           </p>
         </div>
@@ -42,7 +42,7 @@ export default function HomePage() {
               ⚡
             </div>
             <h3 className="font-extrabold text-base text-slate-900">Instant Access</h3>
-            <p className="text-xs text-slate-500 leading-relaxed">
+            <p className="text-xs text-slate-600 leading-relaxed font-medium">
               No shipping delays or postal fees. Instant download link right on your screen plus permanent email delivery.
             </p>
           </div>
@@ -52,7 +52,7 @@ export default function HomePage() {
               🎧
             </div>
             <h3 className="font-extrabold text-base text-slate-900">Bedtime Audio Stories</h3>
-            <p className="text-xs text-slate-500 leading-relaxed">
+            <p className="text-xs text-slate-600 leading-relaxed font-medium">
               Soothing narrated audiobooks with gentle rain soundscapes to help kids drift off calmly without tablet light.
             </p>
           </div>
@@ -62,7 +62,7 @@ export default function HomePage() {
               ✂️
             </div>
             <h3 className="font-extrabold text-base text-slate-900">Creative Paper Crafts</h3>
-            <p className="text-xs text-slate-500 leading-relaxed">
+            <p className="text-xs text-slate-600 leading-relaxed font-medium">
               3D dragon models, cut-and-paste dinosaurs, and scissor-skills projects that foster fine motor control.
             </p>
           </div>
@@ -72,7 +72,7 @@ export default function HomePage() {
               🖨️
             </div>
             <h3 className="font-extrabold text-base text-slate-900">Print as Many Times as Needed</h3>
-            <p className="text-xs text-slate-500 leading-relaxed">
+            <p className="text-xs text-slate-600 leading-relaxed font-medium">
               Unlimited home and classroom print rights. Siblings can each color their favorite sheet without buying twice.
             </p>
           </div>
@@ -83,13 +83,13 @@ export default function HomePage() {
       <LeadMagnet />
 
       {/* 7. Parent & Educator Reviews */}
-      <section className="glass-section max-w-7xl mx-auto px-6 sm:px-10 py-12 my-12">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 my-6">
         <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 font-bold text-xs border border-emerald-200">
-            <Users className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/85 backdrop-blur-md text-emerald-900 border border-emerald-300 font-extrabold text-xs shadow-xs">
+            <Users className="w-3.5 h-3.5 text-emerald-600" />
             <span>Community Love</span>
           </div>
-          <h2 className="text-3xl font-black text-slate-900 mt-2">What Families Say About Tagline</h2>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 mt-2 text-contrast-title">What Families Say About Tagline</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

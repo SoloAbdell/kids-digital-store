@@ -36,38 +36,38 @@ export default function LeadMagnet() {
   };
 
   return (
-    <section id="freebie" className="glass-section max-w-7xl mx-auto px-6 sm:px-12 py-12 my-12">
+    <section id="freebie" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 my-6">
       <div className="relative z-10">
 
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-7 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-2xl bg-emerald-100/90 border border-emerald-300 text-xs font-black tracking-wide uppercase text-emerald-900 shadow-xs">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-2xl bg-white/85 backdrop-blur-md border border-emerald-300 text-xs font-black tracking-wide uppercase text-emerald-900 shadow-xs">
               <Gift className="w-4 h-4 text-emerald-700" />
               <span>Tagline Freebies Download Hub</span>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl font-black text-slate-900 leading-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 leading-tight text-contrast-title">
               Get Your Free 5-Page Activity & Story Starter Pack!
             </h2>
 
-            <p className="text-slate-700 text-sm sm:text-base leading-relaxed font-medium">
+            <p className="text-slate-700 font-semibold text-sm sm:text-base leading-relaxed">
               Test out our digital printables and sample story sheets! Includes 2 high-res coloring pages, 1 DULO TOONS dragon paper craft, and 2 foundational math tracing sheets.
             </p>
 
-            <div className="flex flex-wrap gap-4 text-xs font-bold pt-2 text-slate-800">
-              <div className="flex items-center gap-1.5">
+            <div className="flex flex-wrap gap-3 text-xs font-bold pt-2 text-slate-900">
+              <div className="flex items-center gap-1.5 bg-white/75 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/80 shadow-xs">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600" /> 100% Free • No card needed
               </div>
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1.5 bg-white/75 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/80 shadow-xs">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600" /> Instant PDF Download link
               </div>
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1.5 bg-white/75 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/80 shadow-xs">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600" /> Print as often as you want
               </div>
             </div>
           </div>
 
-          <div className="lg:col-span-5 bg-white/95 backdrop-blur-md text-slate-900 p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-xl border border-slate-200/80">
+          <div className="lg:col-span-5 bg-white/85 backdrop-blur-md text-slate-900 p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-xl border border-white/80">
             {status === 'success' ? (
               <div className="text-center py-4 space-y-3">
                 <div className="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mx-auto text-2xl">

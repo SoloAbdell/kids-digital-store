@@ -98,17 +98,17 @@ export default function ProductCatalog({
     onlyFree;
 
   return (
-    <section id="catalog" className="glass-section max-w-7xl mx-auto px-6 sm:px-10 py-12 my-12">
+    <section id="catalog" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 my-6">
       {/* Title & Subtitle */}
       <div className="text-center mb-10">
-        <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 font-bold text-xs mb-3">
+        <div className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white/85 backdrop-blur-md text-emerald-900 border border-emerald-300 font-extrabold text-xs mb-3 shadow-xs">
           <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
           <span>Tagline Digital Marketplace</span>
         </div>
-        <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight text-contrast-title">
           Featured Digital Products & Downloads
         </h2>
-        <p className="text-slate-500 max-w-2xl mx-auto mt-2 text-sm sm:text-base">
+        <p className="text-slate-700 font-semibold max-w-2xl mx-auto mt-2 text-sm sm:text-base">
           Filter by category, search by format, or preview sample audio and printable worksheets before downloading.
         </p>
       </div>
@@ -117,13 +117,13 @@ export default function ProductCatalog({
       <div className="space-y-6 mb-10">
         {/* Search Bar */}
         <div className="relative max-w-2xl mx-auto">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search eBooks, audiobooks, 3D crafts, DULO TOONS, planners..."
-            className="w-full pl-12 pr-10 py-3.5 sm:py-4 rounded-2xl border border-slate-200 bg-white shadow-xs focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm font-medium placeholder:text-slate-400"
+            className="w-full pl-12 pr-10 py-3.5 sm:py-4 rounded-2xl border border-white/80 bg-white/85 backdrop-blur-md shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm font-semibold placeholder:text-slate-500"
           />
           {searchQuery && (
             <button
@@ -149,12 +149,12 @@ export default function ProductCatalog({
                 className={`px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-extrabold transition-all shrink-0 flex items-center gap-2 ${
                   isSelected
                     ? 'bg-emerald-600 text-white shadow-playful scale-105'
-                    : 'bg-white text-slate-700 hover:bg-emerald-50 hover:text-emerald-800 border border-slate-200'
+                    : 'bg-white/85 backdrop-blur-md text-slate-800 hover:bg-emerald-50 hover:text-emerald-900 border border-white/80 shadow-xs'
                 }`}
               >
                 <span>{cat.icon}</span>
                 <span>{cat.name}</span>
-                <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${isSelected ? 'bg-emerald-700 text-white' : 'bg-slate-100 text-slate-500'}`}>
+                <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${isSelected ? 'bg-emerald-700 text-white' : 'bg-slate-100 text-slate-600 font-bold'}`}>
                   {cat.id === 'all' ? products.length : products.filter(p => p.category === cat.id).length}
                 </span>
               </button>
@@ -163,7 +163,7 @@ export default function ProductCatalog({
         </div>
 
         {/* Secondary Filter Controls Bar */}
-        <div className="bg-white p-4 sm:p-5 rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-xs flex flex-wrap items-center justify-between gap-4">
+        <div className="bg-white/85 backdrop-blur-md p-4 sm:p-5 rounded-2xl sm:rounded-3xl border border-white/80 shadow-xs flex flex-wrap items-center justify-between gap-4">
           <div className="flex flex-wrap items-center gap-3">
             {/* Format Filter Dropdown */}
             <div className="flex items-center gap-2">

@@ -29,14 +29,14 @@ body {
   pointer-events: none;
 }
 
-/* 3. VOILE GLOBAL POUR LA LISIBILITÉ DU TEXTE */
+/* 3. VOILE GLOBAL ULTRA-LÉGER POUR LAISSER L'ANIMATION 3D 100% VISIBLE */
 .global-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.45) 0%, rgba(245, 243, 255, 0.65) 100%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(245, 243, 255, 0.22) 100%);
   z-index: -1; /* Entre la vidéo et le contenu */
   pointer-events: none;
 }
@@ -47,14 +47,26 @@ body {
   z-index: 1; /* Au-dessus de l'arrière-plan */
 }
 
-/* 5. SECTIONS AVEC EFFET GLASSMORPHISM */
+/* 5. SECTIONS TOTALEMENT TRANSPARENTES (AUCUN BLOC BLANC GÊNANT L'ANIMATION) */
 .glass-section {
-  background: rgba(255, 255, 255, 0.82); /* Semi-transparent */
-  backdrop-filter: blur(14px);          /* Flou pour faire ressortir le texte */
-  -webkit-backdrop-filter: blur(14px);
-  border-radius: 28px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: none;
+  box-shadow: none;
+}
+
+/* Effet Glassmorphism subtil pour les cartes individuelles */
+.cozy-glass-card {
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.65);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.text-contrast-title {
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9), 0 2px 10px rgba(0, 0, 0, 0.08);
 }
 
 /* Custom logo-themed watermark overlay */

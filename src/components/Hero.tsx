@@ -12,7 +12,7 @@ export default function Hero() {
         </div>
 
         {/* Titre Principal */}
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-[#1e1b4b] leading-[1.18] mb-5 tracking-tight">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-[#1e1b4b] leading-[1.18] mb-5 tracking-tight text-contrast-title">
           Welcome to Tagline:<br />
           <span className="text-[#0d9488]">Your Cozy Hub</span> for{' '}
           <span className="text-[#6366f1]">Digital</span>{' '}
@@ -20,7 +20,7 @@ export default function Hero() {
         </h1>
 
         {/* Description */}
-        <p className="text-lg sm:text-xl text-[#334155] max-w-[700px] mx-auto mb-8 font-medium leading-relaxed">
+        <p className="text-lg sm:text-xl text-slate-800 max-w-[700px] mx-auto mb-8 font-bold leading-relaxed">
           Discover downloadable eBooks, creative paper crafts, and bedtime audiobooks.
         </p>
 
