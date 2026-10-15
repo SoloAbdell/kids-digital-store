@@ -46,33 +46,9 @@ export default function DuloToonsBanner({ products, onSelectDuloFilter }: DuloTo
   };
 
   return (
-    <section id="dulo-toons" className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="relative overflow-hidden rounded-3xl shadow-2xl border border-amber-200/70">
-        {/* Full 3D Pixar Background with Seamless Video Loop Support */}
-        <div className="absolute inset-0 overflow-hidden">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            poster="/hero-banner.jpg"
-            className="absolute inset-0 w-full h-full object-cover"
-          >
-            <source src="/hero-banner.mp4" type="video/mp4" />
-            <source src="/hero-banner.webm" type="video/webm" />
-            <img
-              src="/hero-banner.jpg"
-              alt="3D Pixar Scene"
-              className="w-full h-full object-cover"
-            />
-          </video>
-          {/* Gentle atmospheric layer preserving the 3D kids, dragon & cozy landscape */}
-          <div className="absolute inset-0 bg-white/60 backdrop-blur-[1px]" />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/65 to-emerald-50/75" />
-        </div>
-
-        <div className="relative z-10 p-6 sm:p-10 lg:p-12">
-          {/* Header Row */}
+    <section id="dulo-toons" className="glass-section max-w-7xl mx-auto px-6 sm:px-10 py-10 my-12">
+      <div className="relative z-10">
+        {/* Header Row */}
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 pb-8 border-b border-emerald-200/70">
             <div className="space-y-3 max-w-2xl">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-2xl bg-emerald-100/90 border border-emerald-300 text-emerald-900 text-xs font-black tracking-wide uppercase shadow-xs">
@@ -185,7 +161,6 @@ export default function DuloToonsBanner({ products, onSelectDuloFilter }: DuloTo
             </button>
           </div>
         </div>
-      </div>
     </section>
   );
 }

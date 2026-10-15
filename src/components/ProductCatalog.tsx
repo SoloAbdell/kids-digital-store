@@ -98,7 +98,7 @@ export default function ProductCatalog({
     onlyFree;
 
   return (
-    <section id="catalog" className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="catalog" className="glass-section max-w-7xl mx-auto px-6 sm:px-10 py-12 my-12">
       {/* Title & Subtitle */}
       <div className="text-center mb-10">
         <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 font-bold text-xs mb-3">

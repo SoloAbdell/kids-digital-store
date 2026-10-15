@@ -29,7 +29,7 @@ export default function FAQ() {
   ];
 
   return (
-    <section id="faq" className="py-16 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="faq" className="glass-section max-w-4xl mx-auto px-6 sm:px-10 py-12 my-12">
       <div className="text-center mb-10">
         <span className="text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-100 border border-emerald-200 px-3.5 py-1 rounded-full">
           Got Questions?
@@ -42,7 +42,7 @@ export default function FAQ() {
         {faqs.map((faq, idx) => (
           <details
             key={idx}
-            className="group bg-white rounded-2xl border border-slate-200/80 p-5 open:ring-2 open:ring-emerald-200 transition-all cursor-pointer"
+            className="group bg-white/85 backdrop-blur-md rounded-2xl border border-white/80 p-5 shadow-xs open:ring-2 open:ring-emerald-300 transition-all cursor-pointer"
           >
             <summary className="flex items-center justify-between font-bold text-slate-800 text-sm sm:text-base list-none">
               <span className="flex items-center gap-3">

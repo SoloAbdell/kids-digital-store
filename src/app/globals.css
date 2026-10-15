@@ -7,11 +7,54 @@
   --foreground: #0F172A;
 }
 
+/* 1. RESET & CORPS DE LA PAGE */
 body {
+  margin: 0;
+  padding: 0;
   color: var(--foreground);
-  background-color: var(--background);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: transparent;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   overflow-x: hidden;
+}
+
+/* 2. L'ARRIÈRE-PLAN 3D FIXE SUR TOUTE LA PAGE */
+.global-3d-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -2; /* Toujours tout en bas */
+  pointer-events: none;
+}
+
+/* 3. VOILE GLOBAL POUR LA LISIBILITÉ DU TEXTE */
+.global-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.45) 0%, rgba(245, 243, 255, 0.65) 100%);
+  z-index: -1; /* Entre la vidéo et le contenu */
+  pointer-events: none;
+}
+
+/* 4. LE CONTENU QUI SCROLLE AU-DESSUS */
+.page-content {
+  position: relative;
+  z-index: 1; /* Au-dessus de l'arrière-plan */
+}
+
+/* 5. SECTIONS AVEC EFFET GLASSMORPHISM */
+.glass-section {
+  background: rgba(255, 255, 255, 0.82); /* Semi-transparent */
+  backdrop-filter: blur(14px);          /* Flou pour faire ressortir le texte */
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 28px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.65);
 }
 
 /* Custom logo-themed watermark overlay */
