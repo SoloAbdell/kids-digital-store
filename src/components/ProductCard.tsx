@@ -98,7 +98,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   const isFree = product.price === 0 || product.is_freebie;
 
   return (
-    <div className="group bg-white/85 hover:bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl border border-white/80 shadow-xs hover:shadow-xl hover:border-emerald-200 hover:-translate-y-1 transition-all overflow-hidden flex flex-col justify-between">
+    <div className="group bg-white hover:bg-white rounded-2xl sm:rounded-3xl border border-slate-200 shadow-xs hover:shadow-xl hover:border-emerald-300 hover:-translate-y-1 transition-all overflow-hidden flex flex-col justify-between">
       <div>
         {/* Thumbnail Container */}
         <div className="relative aspect-[4/3] overflow-hidden bg-slate-50">

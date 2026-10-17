@@ -44,7 +44,7 @@ export default function Hero() {
 
         {/* Core Value Proposition Badges */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl mx-auto text-left pt-2">
-          <div className="bg-white/85 backdrop-blur-md p-3.5 rounded-2xl border border-white/80 shadow-xs flex items-start gap-2.5">
+          <div className="bg-white p-3.5 rounded-2xl border border-slate-200/80 shadow-xs flex items-start gap-2.5">
             <div className="w-9 h-9 rounded-xl bg-teal-100 flex items-center justify-center text-teal-800 shrink-0">
               <Download className="w-4 h-4" />
             </div>
@@ -54,7 +54,7 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="bg-white/85 backdrop-blur-md p-3.5 rounded-2xl border border-white/80 shadow-xs flex items-start gap-2.5">
+          <div className="bg-white p-3.5 rounded-2xl border border-slate-200/80 shadow-xs flex items-start gap-2.5">
             <div className="w-9 h-9 rounded-xl bg-indigo-100 flex items-center justify-center text-indigo-800 shrink-0">
               <Headphones className="w-4 h-4" />
             </div>
@@ -64,7 +64,7 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="bg-white/85 backdrop-blur-md p-3.5 rounded-2xl border border-white/80 shadow-xs flex items-start gap-2.5">
+          <div className="bg-white p-3.5 rounded-2xl border border-slate-200/80 shadow-xs flex items-start gap-2.5">
             <div className="w-9 h-9 rounded-xl bg-amber-100 flex items-center justify-center text-amber-800 shrink-0">
               <BookOpen className="w-4 h-4" />
             </div>
@@ -74,13 +74,34 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="bg-white/85 backdrop-blur-md p-3.5 rounded-2xl border border-white/80 shadow-xs flex items-start gap-2.5">
+          <div className="bg-white p-3.5 rounded-2xl border border-slate-200/80 shadow-xs flex items-start gap-2.5">
             <div className="w-9 h-9 rounded-xl bg-teal-100 flex items-center justify-center text-teal-800 shrink-0">
               <ShieldCheck className="w-4 h-4" />
             </div>
             <div>
               <h3 className="font-extrabold text-xs text-slate-900">Lifetime Re-Use</h3>
               <p className="text-[11px] text-slate-500">Unlimited prints.</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Featured 3D Pixar Scene Centerpiece (Framed, Clean & 100% Readable on Mobile & Desktop) */}
+        <div className="mt-12 relative rounded-3xl overflow-hidden border border-slate-200/90 shadow-xl group bg-white">
+          <div className="aspect-[16/9] sm:aspect-[21/9] w-full overflow-hidden relative">
+            <img
+              src="/hero-banner.jpg"
+              alt="3D Pixar Scene with Dulo, Panda and Kids"
+              className="w-full h-full object-cover object-center group-hover:scale-102 transition-transform duration-700"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent flex items-end p-6 sm:p-8">
+              <div className="text-left text-white">
+                <span className="inline-block px-3 py-1 rounded-full bg-emerald-500 text-white font-black text-xs uppercase tracking-wider mb-1.5 shadow-xs">
+                  🐉 Dulo Toons Universe
+                </span>
+                <h3 className="text-lg sm:text-2xl font-black tracking-tight text-white drop-shadow-md">
+                  Step Into A Cozy World of Imagination & Wonder
+                </h3>
+              </div>
             </div>
           </div>
         </div>

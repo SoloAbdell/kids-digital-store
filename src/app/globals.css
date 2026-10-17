@@ -7,44 +7,20 @@
   --foreground: #0F172A;
 }
 
-/* 1. RESET & CORPS DE LA PAGE */
+/* 1. RESET & CORPS DE LA PAGE (Propre, lisible sur mobile & desktop) */
 body {
   margin: 0;
   padding: 0;
   color: var(--foreground);
-  background-color: transparent;
+  background-color: #FAF8F5;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   overflow-x: hidden;
 }
 
-/* 2. L'ARRIÈRE-PLAN 3D FIXE & ANIME SUR TOUTE LA PAGE */
-.global-3d-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  z-index: -2;
-  pointer-events: none;
-}
-
-/* 3. VOILE GLOBAL ULTRA-LÉGER POUR LAISSER L'ANIMATION 100% VIBRANTE */
-.global-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(245, 243, 255, 0.22) 100%);
-  z-index: -1;
-  pointer-events: none;
-}
-
-/* 4. LE CONTENU QUI SCROLLE AU-DESSUS */
+/* 2. LE CONTENU QUI SCROLLE PROPREMENT */
 .page-content {
   position: relative;
-  z-index: 1; /* Au-dessus de l'arrière-plan */
+  z-index: 1;
 }
 
 /* 5. SECTIONS TOTALEMENT TRANSPARENTES (AUCUN BLOC BLANC GÊNANT L'ANIMATION) */

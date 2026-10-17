@@ -51,7 +51,7 @@ export default function DuloToonsBanner({ products, onSelectDuloFilter }: DuloTo
         {/* Header Row */}
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 pb-8 border-b border-emerald-200/40">
             <div className="space-y-3 max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-2xl bg-white/85 backdrop-blur-md border border-emerald-300 text-emerald-900 text-xs font-black tracking-wide uppercase shadow-xs">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-2xl bg-white border border-emerald-300 text-emerald-900 text-xs font-black tracking-wide uppercase shadow-xs">
                 <span>🐉 Featured Universe Spotlight</span>
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-ping" />
                 <span className="text-amber-700 font-bold">DULO TOONS</span>
@@ -67,7 +67,7 @@ export default function DuloToonsBanner({ products, onSelectDuloFilter }: DuloTo
             </div>
 
             {/* Quick Audio Sample Pill */}
-            <div className="bg-white/90 backdrop-blur-md p-4 rounded-2xl border border-emerald-200 shadow-md shrink-0 w-full sm:w-auto">
+            <div className="bg-white p-4 rounded-2xl border border-emerald-200 shadow-sm shrink-0 w-full sm:w-auto">
               <div className="flex items-center gap-3">
                 <button
                   onClick={toggleAudio}
@@ -93,7 +93,7 @@ export default function DuloToonsBanner({ products, onSelectDuloFilter }: DuloTo
             {duloProducts.map((item) => (
               <div
                 key={item.id}
-                className="group bg-white/80 hover:bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl border border-white/80 hover:border-emerald-300 p-4 transition-all hover:shadow-xl hover:-translate-y-1 flex flex-col justify-between shadow-xs"
+                className="group bg-white hover:bg-white rounded-2xl sm:rounded-3xl border border-slate-200 hover:border-emerald-300 p-4 transition-all hover:shadow-xl hover:-translate-y-1 flex flex-col justify-between shadow-xs"
               >
                 <div>
                   <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-slate-100 mb-3 border border-slate-200/60">
@@ -146,7 +146,7 @@ export default function DuloToonsBanner({ products, onSelectDuloFilter }: DuloTo
           </div>
 
           {/* Bottom Callout */}
-          <div className="mt-8 p-4 sm:p-5 rounded-2xl bg-white/80 backdrop-blur-md border border-white/70 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-800 font-semibold">
+          <div className="mt-8 p-4 sm:p-5 rounded-2xl bg-white border border-slate-200 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-800 font-semibold">
             <div className="flex items-center gap-2">
               <span className="text-lg">✨</span>
               <span>All DULO TOONS digital assets include instant DRM-free download & unlimited family print license.</span>

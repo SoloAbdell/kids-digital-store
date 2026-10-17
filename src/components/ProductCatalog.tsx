@@ -117,13 +117,13 @@ export default function ProductCatalog({
       <div className="space-y-6 mb-10">
         {/* Search Bar */}
         <div className="relative max-w-2xl mx-auto">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search eBooks, audiobooks, 3D crafts, DULO TOONS, planners..."
-            className="w-full pl-12 pr-10 py-3.5 sm:py-4 rounded-2xl border border-white/80 bg-white/85 backdrop-blur-md shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm font-semibold placeholder:text-slate-500"
+            className="w-full pl-12 pr-10 py-3.5 sm:py-4 rounded-2xl border border-slate-200 bg-white shadow-xs focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm font-medium placeholder:text-slate-400 text-slate-900"
           />
           {searchQuery && (
             <button
@@ -149,7 +149,7 @@ export default function ProductCatalog({
                 className={`px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-extrabold transition-all shrink-0 flex items-center gap-2 ${
                   isSelected
                     ? 'bg-emerald-600 text-white shadow-playful scale-105'
-                    : 'bg-white/85 backdrop-blur-md text-slate-800 hover:bg-emerald-50 hover:text-emerald-900 border border-white/80 shadow-xs'
+                    : 'bg-white text-slate-700 hover:bg-emerald-50 hover:text-emerald-900 border border-slate-200 shadow-xs'
                 }`}
               >
                 <span>{cat.icon}</span>
@@ -163,7 +163,7 @@ export default function ProductCatalog({
         </div>
 
         {/* Secondary Filter Controls Bar */}
-        <div className="bg-white/85 backdrop-blur-md p-4 sm:p-5 rounded-2xl sm:rounded-3xl border border-white/80 shadow-xs flex flex-wrap items-center justify-between gap-4">
+        <div className="bg-white p-4 sm:p-5 rounded-2xl sm:rounded-3xl border border-slate-200 shadow-xs flex flex-wrap items-center justify-between gap-4">
           <div className="flex flex-wrap items-center gap-3">
             {/* Format Filter Dropdown */}
             <div className="flex items-center gap-2">

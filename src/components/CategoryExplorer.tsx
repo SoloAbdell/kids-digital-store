@@ -75,7 +75,7 @@ export default function CategoryExplorer({ onSelectCategory }: CategoryExplorerP
     <section id="categories" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 my-6">
       <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 mb-8">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/85 backdrop-blur-md text-emerald-900 border border-emerald-300 font-extrabold text-xs mb-2 shadow-xs">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white text-emerald-900 border border-emerald-300 font-extrabold text-xs mb-2 shadow-xs">
             <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
             <span>Curated Collections</span>
           </div>
@@ -89,7 +89,7 @@ export default function CategoryExplorer({ onSelectCategory }: CategoryExplorerP
 
         <a
           href="#catalog"
-          className="text-xs font-bold text-emerald-800 hover:text-emerald-900 bg-white/80 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/80 shadow-xs flex items-center gap-1 group"
+          className="text-xs font-bold text-emerald-800 hover:text-emerald-900 bg-white px-3.5 py-1.5 rounded-full border border-slate-200 shadow-xs flex items-center gap-1 group"
         >
           <span>View All 15+ Products</span>
           <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
@@ -101,7 +101,7 @@ export default function CategoryExplorer({ onSelectCategory }: CategoryExplorerP
           <div
             key={c.id}
             onClick={() => handleCardClick(c.id)}
-            className={`p-5 rounded-2xl sm:rounded-3xl bg-white/80 hover:bg-white/95 backdrop-blur-md border border-white/80 hover:border-slate-300 hover:shadow-lg hover:-translate-y-1 transition-all cursor-pointer flex flex-col justify-between shadow-xs`}
+            className="p-5 rounded-2xl sm:rounded-3xl bg-white hover:bg-white border border-slate-200 hover:border-slate-300 hover:shadow-lg hover:-translate-y-1 transition-all cursor-pointer flex flex-col justify-between shadow-xs"
           >
             <div>
               <div className="flex items-center justify-between mb-4">

@@ -41,7 +41,7 @@ export default function LeadMagnet() {
 
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-7 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-2xl bg-white/85 backdrop-blur-md border border-emerald-300 text-xs font-black tracking-wide uppercase text-emerald-900 shadow-xs">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-2xl bg-white border border-emerald-300 text-xs font-black tracking-wide uppercase text-emerald-900 shadow-xs">
               <Gift className="w-4 h-4 text-emerald-700" />
               <span>Tagline Freebies Download Hub</span>
             </div>
@@ -55,19 +55,19 @@ export default function LeadMagnet() {
             </p>
 
             <div className="flex flex-wrap gap-3 text-xs font-bold pt-2 text-slate-900">
-              <div className="flex items-center gap-1.5 bg-white/75 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/80 shadow-xs">
+              <div className="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-full border border-slate-200 shadow-xs">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600" /> 100% Free • No card needed
               </div>
-              <div className="flex items-center gap-1.5 bg-white/75 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/80 shadow-xs">
+              <div className="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-full border border-slate-200 shadow-xs">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600" /> Instant PDF Download link
               </div>
-              <div className="flex items-center gap-1.5 bg-white/75 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/80 shadow-xs">
+              <div className="flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-full border border-slate-200 shadow-xs">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600" /> Print as often as you want
               </div>
             </div>
           </div>
 
-          <div className="lg:col-span-5 bg-white/85 backdrop-blur-md text-slate-900 p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-xl border border-white/80">
+          <div className="lg:col-span-5 bg-white text-slate-900 p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-xl border border-slate-200">
             {status === 'success' ? (
               <div className="text-center py-4 space-y-3">
                 <div className="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mx-auto text-2xl">
