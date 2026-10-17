@@ -79,7 +79,7 @@ export default function CategoryExplorer({ onSelectCategory }: CategoryExplorerP
             <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
             <span>Curated Collections</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight text-contrast-title">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">
             Explore Digital Goods by Category
           </h2>
           <p className="text-xs sm:text-sm text-slate-700 font-semibold mt-1">

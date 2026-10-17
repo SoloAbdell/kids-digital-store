@@ -101,14 +101,14 @@ export default function ProductCatalog({
     <section id="catalog" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 my-6">
       {/* Title & Subtitle */}
       <div className="text-center mb-10">
-        <div className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white/85 backdrop-blur-md text-emerald-900 border border-emerald-300 font-extrabold text-xs mb-3 shadow-xs">
+        <div className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white text-emerald-900 border border-emerald-300 font-extrabold text-xs mb-3 shadow-xs">
           <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
           <span>Tagline Digital Marketplace</span>
         </div>
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight text-contrast-title">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight">
           Featured Digital Products & Downloads
         </h2>
-        <p className="text-slate-700 font-semibold max-w-2xl mx-auto mt-2 text-sm sm:text-base">
+        <p className="text-slate-600 font-medium max-w-2xl mx-auto mt-2 text-sm sm:text-base">
           Filter by category, search by format, or preview sample audio and printable worksheets before downloading.
         </p>
       </div>

@@ -57,13 +57,48 @@ export default function DuloToonsBanner({ products, onSelectDuloFilter }: DuloTo
                 <span className="text-amber-700 font-bold">DULO TOONS</span>
               </div>
 
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight text-contrast-title">
-                Meet <span className="bg-gradient-to-r from-emerald-700 via-teal-700 to-amber-600 bg-clip-text text-transparent">Dulo The Baby Dragon</span> & Friends
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+                Meet <span className="text-emerald-600">Dulo The Baby Dragon</span> & Friends
               </h2>
 
               <p className="text-slate-700 text-sm sm:text-base leading-relaxed font-medium">
                 Step into the enchanting world of Dulo—the adorable baby dragon who sneezes warm starlight sparks instead of fire! Explore our exclusive collection of bedtime audio stories, 3D dragon crafts, and printable coloring sheets.
               </p>
+
+              {/* Character Spotlight Badges */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-3">
+                <div className="bg-emerald-50/80 border border-emerald-200/80 p-2.5 rounded-2xl flex items-center gap-2">
+                  <span className="text-2xl">🐉</span>
+                  <div>
+                    <h4 className="text-xs font-black text-emerald-950">Dulo</h4>
+                    <p className="text-[10px] text-emerald-700 font-semibold">Starlight Dragon</p>
+                  </div>
+                </div>
+
+                <div className="bg-indigo-50/80 border border-indigo-200/80 p-2.5 rounded-2xl flex items-center gap-2">
+                  <span className="text-2xl">🐼</span>
+                  <div>
+                    <h4 className="text-xs font-black text-indigo-950">Pip</h4>
+                    <p className="text-[10px] text-indigo-700 font-semibold">Curious Coder Panda</p>
+                  </div>
+                </div>
+
+                <div className="bg-amber-50/80 border border-amber-200/80 p-2.5 rounded-2xl flex items-center gap-2">
+                  <span className="text-2xl">🦊</span>
+                  <div>
+                    <h4 className="text-xs font-black text-amber-950">Rusty</h4>
+                    <p className="text-[10px] text-amber-700 font-semibold">Bedtime Story Fox</p>
+                  </div>
+                </div>
+
+                <div className="bg-rose-50/80 border border-rose-200/80 p-2.5 rounded-2xl flex items-center gap-2">
+                  <span className="text-2xl">👧</span>
+                  <div>
+                    <h4 className="text-xs font-black text-rose-950">Maya</h4>
+                    <p className="text-[10px] text-rose-700 font-semibold">Craft Adventurer</p>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Quick Audio Sample Pill */}

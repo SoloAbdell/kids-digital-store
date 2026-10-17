@@ -7,20 +7,14 @@
   --foreground: #0F172A;
 }
 
-/* 1. RESET & CORPS DE LA PAGE (Propre, moderne, ultra-lisible) */
+/* 1. RESET & CORPS DE LA PAGE (Warm storybook canvas, ultra-lisible & doux pour les yeux) */
 body {
   margin: 0;
   padding: 0;
   color: var(--foreground);
-  background-color: #F8FAFC;
+  background-color: #FAF9F6;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   overflow-x: hidden;
-}
-
-/* Subtle modern creative grid pattern */
-.bg-grid-pattern {
-  background-image: radial-gradient(rgba(148, 163, 184, 0.25) 1.2px, transparent 1.2px);
-  background-size: 24px 24px;
 }
 
 /* 2. LE CONTENU QUI SCROLLE PROPREMENT */
@@ -48,7 +42,7 @@ body {
 }
 
 .text-contrast-title {
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9), 0 2px 10px rgba(0, 0, 0, 0.08);
+  /* Clean contrast without white text-shadow washouts */
 }
 
 /* Custom logo-themed watermark overlay */

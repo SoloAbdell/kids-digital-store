@@ -34,7 +34,7 @@ export default function FAQ() {
         <span className="text-xs font-black uppercase tracking-wider text-emerald-900 bg-white border border-emerald-300 px-3.5 py-1.5 rounded-full shadow-xs">
           Got Questions?
         </span>
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 mt-3 text-contrast-title">Frequently Asked Questions</h2>
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 mt-3">Frequently Asked Questions</h2>
         <p className="text-xs sm:text-sm text-slate-700 font-semibold mt-1">Everything you need to know about formats, audio playback, and printing.</p>
       </div>
 

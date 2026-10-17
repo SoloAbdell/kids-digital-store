@@ -46,7 +46,7 @@ export default function LeadMagnet() {
               <span>Tagline Freebies Download Hub</span>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 leading-tight text-contrast-title">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 leading-tight">
               Get Your Free 5-Page Activity & Story Starter Pack!
             </h2>
 
