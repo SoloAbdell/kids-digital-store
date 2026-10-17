@@ -17,7 +17,7 @@ body {
   overflow-x: hidden;
 }
 
-/* 2. L'ARRIÈRE-PLAN 3D FIXE SUR TOUTE LA PAGE */
+/* 2. L'ARRIÈRE-PLAN 3D FIXE & ANIME SUR TOUTE LA PAGE */
 .global-3d-background {
   position: fixed;
   top: 0;
@@ -25,11 +25,11 @@ body {
   width: 100vw;
   height: 100vh;
   object-fit: cover;
-  z-index: -2; /* Toujours tout en bas */
+  z-index: -2;
   pointer-events: none;
 }
 
-/* 3. VOILE GLOBAL ULTRA-LÉGER POUR LAISSER L'ANIMATION 3D 100% VISIBLE */
+/* 3. VOILE GLOBAL ULTRA-LÉGER POUR LAISSER L'ANIMATION 100% VIBRANTE */
 .global-overlay {
   position: fixed;
   top: 0;
@@ -37,7 +37,7 @@ body {
   width: 100vw;
   height: 100vh;
   background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(245, 243, 255, 0.22) 100%);
-  z-index: -1; /* Entre la vidéo et le contenu */
+  z-index: -1;
   pointer-events: none;
 }
 
@@ -107,4 +107,41 @@ body {
   pointer-events: none;
   background: radial-gradient(circle, rgba(253, 224, 71, 0.9) 0%, rgba(245, 158, 11, 0) 75%);
   animation: floatDust 7s ease-in-out infinite;
+}
+
+/* 7. CINEMATIC CAMERA DRIFT & GENTLE BREATHING MOTION */
+@keyframes cinematicDrift {
+  0% {
+    transform: scale(1.0) translate(0, 0);
+  }
+  50% {
+    transform: scale(1.03) translate(-8px, -4px);
+  }
+  100% {
+    transform: scale(1.0) translate(0, 0);
+  }
+}
+
+.animate-cinematic-drift {
+  animation: cinematicDrift 16s ease-in-out infinite alternate;
+}
+
+/* 8. STREAMING SUNLIGHT BEAM ILLUMINATION */
+@keyframes sunbeamPulse {
+  0% {
+    opacity: 0.35;
+    transform: rotate(-15deg) translateY(0);
+  }
+  50% {
+    opacity: 0.65;
+    transform: rotate(-13deg) translateY(12px);
+  }
+  100% {
+    opacity: 0.35;
+    transform: rotate(-15deg) translateY(0);
+  }
+}
+
+.animate-sunbeam {
+  animation: sunbeamPulse 8s ease-in-out infinite;
 }
