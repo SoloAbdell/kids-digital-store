@@ -11,17 +11,17 @@ export default function Hero() {
           ⭐⭐⭐⭐⭐ Loved by 6,500+ Parents Worldwide
         </div>
 
-        {/* Titre Principal */}
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-[#1e1b4b] leading-[1.18] mb-5 tracking-tight text-contrast-title">
-          Welcome to Tagline:<br />
-          <span className="text-[#0d9488]">Your Cozy Hub</span> for{' '}
-          <span className="text-[#6366f1]">Digital</span>{' '}
-          <span className="text-[#ea580c]">Crafts & Stories</span>
+        {/* Titre Principal (Court, élégant et accrocheur) */}
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 leading-[1.12] mb-4 tracking-tight">
+          Magical Stories & Crafts <br />
+          <span className="bg-gradient-to-r from-teal-600 via-indigo-600 to-amber-500 bg-clip-text text-transparent">
+            For Curious Kids
+          </span>
         </h1>
 
         {/* Description */}
-        <p className="text-lg sm:text-xl text-slate-800 max-w-[700px] mx-auto mb-8 font-bold leading-relaxed">
-          Discover downloadable eBooks, creative paper crafts, and bedtime audiobooks.
+        <p className="text-base sm:text-lg text-slate-600 max-w-[620px] mx-auto mb-8 font-semibold leading-relaxed">
+          Downloadable eBooks, creative paper crafts, and bedtime audiobooks to spark your child&apos;s imagination.
         </p>
 
         {/* Boutons d'Action (CTAs) */}

@@ -7,14 +7,20 @@
   --foreground: #0F172A;
 }
 
-/* 1. RESET & CORPS DE LA PAGE (Propre, lisible sur mobile & desktop) */
+/* 1. RESET & CORPS DE LA PAGE (Propre, moderne, ultra-lisible) */
 body {
   margin: 0;
   padding: 0;
   color: var(--foreground);
-  background-color: #FAF8F5;
+  background-color: #F8FAFC;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   overflow-x: hidden;
+}
+
+/* Subtle modern creative grid pattern */
+.bg-grid-pattern {
+  background-image: radial-gradient(rgba(148, 163, 184, 0.25) 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
 }
 
 /* 2. LE CONTENU QUI SCROLLE PROPREMENT */

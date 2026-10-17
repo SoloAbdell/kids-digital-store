@@ -17,12 +17,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="min-h-screen flex flex-col bg-[#FAF8F5] text-slate-800 antialiased relative">
-        {/* Subtle, soft ambient warm glow in background */}
+      <body className="min-h-screen flex flex-col bg-[#F8FAFC] text-slate-800 antialiased relative selection:bg-emerald-100 selection:text-emerald-800">
+        {/* Modern luminous ambient glows & subtle grid */}
         <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
-          <div className="absolute -top-32 -left-32 w-96 h-96 bg-amber-100/40 rounded-full blur-3xl" />
-          <div className="absolute top-1/3 -right-32 w-[28rem] h-[28rem] bg-indigo-50/50 rounded-full blur-3xl" />
-          <div className="absolute bottom-10 -left-32 w-96 h-96 bg-teal-50/40 rounded-full blur-3xl" />
+          {/* Subtle dot pattern */}
+          <div className="absolute inset-0 bg-grid-pattern opacity-60" />
+          {/* Soft ambient luminous lights */}
+          <div className="absolute -top-24 left-1/4 w-[36rem] h-[36rem] bg-teal-200/25 rounded-full blur-[110px]" />
+          <div className="absolute top-1/4 -right-24 w-[32rem] h-[32rem] bg-indigo-200/25 rounded-full blur-[110px]" />
+          <div className="absolute top-2/3 -left-24 w-[28rem] h-[28rem] bg-amber-200/20 rounded-full blur-[100px]" />
+          <div className="absolute -bottom-24 right-1/4 w-[32rem] h-[32rem] bg-teal-200/20 rounded-full blur-[110px]" />
         </div>
 
         {/* Page Content with Cart Context */}
